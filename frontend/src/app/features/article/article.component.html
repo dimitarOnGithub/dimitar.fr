@@ -1,0 +1,14 @@
+<div class="article">
+  <h2>
+    {{ article().title }}
+  </h2>
+  <div class="published-date">
+    {{ article().publishedDate | date: 'EEEE, dd/MMM/yyyy' }}
+  </div>
+  <div class="article-content">
+    {{ article().content }}
+  </div>
+</div>
+
+<a [routerLink]="['/posts', article().id + 1]">next</a>
+<app-article-navigation />

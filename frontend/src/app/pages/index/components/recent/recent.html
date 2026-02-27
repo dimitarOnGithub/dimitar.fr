@@ -1,0 +1,15 @@
+<h3>Most Recent Updates</h3>
+<div class="recent-updates">
+  @for (article of articles(); track article.id) {
+    <div class="item">
+      <a [routerLink]="['/posts', article.id]">{{ article.title }}</a>
+      <span class="breaker"></span>
+      <span class="item-date">Feb, 2026</span>
+  </div>
+  } @empty {
+    <p>No recent articles found.</p>
+  }
+  @if (contentLeft()) {
+    <button (click)="loadNext()">Load More</button>
+  }
+</div>

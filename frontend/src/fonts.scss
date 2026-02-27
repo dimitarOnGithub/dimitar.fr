@@ -1,0 +1,28 @@
+// Regular
+@font-face {
+  font-family: 'CrimsonText';
+  font-style: normal;
+  src: url('assets/fonts/CrimsonText-Regular.ttf') format('opentype');
+}
+
+// Bold
+@font-face {
+  font-family: 'CrimsonText';
+  font-weight: bold;
+  src: url('assets/fonts/CrimsonText-Bold.ttf') format('opentype');
+}
+
+// Italic
+@font-face {
+  font-family: 'CrimsonText';
+  font-style: italic;
+  src: url('assets/fonts/CrimsonText-Italic.ttf') format('opentype');
+}
+
+// Bold Italic
+@font-face {
+  font-family: 'CrimsonText';
+  font-style: italic;
+  font-weight: bold;
+  src: url('assets/fonts/CrimsonText-BoldItalic.ttf') format('opentype');
+}

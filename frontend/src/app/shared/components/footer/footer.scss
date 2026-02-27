@@ -1,0 +1,14 @@
+:host {
+  display: block;
+  border-top: 1px solid black;
+  padding-right: 10px;
+  margin-inline: 5px;
+
+  @media (min-width: 720px) {
+    margin-top: 30px;
+  }
+}
+
+p {
+  text-align: right;
+}

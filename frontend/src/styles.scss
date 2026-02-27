@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+
+html {
+  font-family: 'CrimsonText', sans-serif;
+  background-color: #CCCCCC;
+  color: #292626;
+  font-size: 2rem;
+}
+
+body {
+  max-inline-size: 1300px;
+  margin-inline: auto;
+}
+
+.highlight {
+  background-image: linear-gradient(
+      to right,
+      rgba(255, 160, 177, 0.1),
+      rgb(255, 105, 180, 0.6)
+  );
+  color: #292626;
+  padding-right: 3px;
+  text-decoration: none;
+  text-wrap: nowrap;
+  font-style: italic;
+  transition: background-color 0.4s ease;
+}
+
+.highlight:hover {
+  background-color: rgb(239, 174, 209);
+  cursor: pointer;
+}
+
+.highlight:visited {
+  color: purple;
+}
