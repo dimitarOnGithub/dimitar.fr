@@ -1,0 +1,29 @@
+.listen-widget {
+  display: inline-grid;
+  grid-template-columns: 1fr auto;
+  justify-items: start;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  max-block-size: 100px;
+}
+
+.song-details {
+  justify-self: right;
+  padding-inline: 3px;
+
+  .song-title {
+    text-align: right;
+    font-style: italic;
+  }
+
+  .song-artist {
+    text-align: right;
+    font-weight: bold;
+  }
+
+}
+
+.album-image {
+  border-radius: 0.8rem;
+}

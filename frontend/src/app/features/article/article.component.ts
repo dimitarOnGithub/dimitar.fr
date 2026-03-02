@@ -3,15 +3,17 @@ import {ActivatedRoute, RouterLink} from '@angular/router';
 import {ArticleService} from '@app/features/article/services/article.service';
 import {switchMap} from 'rxjs';
 import {toSignal} from '@angular/core/rxjs-interop';
-import {DatePipe, formatDate} from '@angular/common';
+import {DatePipe} from '@angular/common';
 import {ArticleNavigation} from '@app/features/article/components/article-navigation/article-navigation';
+import {Listening} from '@app/features/article/components/listening/listening';
 
 @Component({
   selector: 'app-article',
   imports: [
     RouterLink,
     DatePipe,
-    ArticleNavigation
+    ArticleNavigation,
+    Listening
   ],
   templateUrl: './article.component.html',
   styleUrl: './article.component.scss',
