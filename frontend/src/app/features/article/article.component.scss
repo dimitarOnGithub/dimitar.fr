@@ -11,29 +11,22 @@
   @media (min-width: 720px) {
     grid-template-columns: 7fr auto;
   }
-
-  h2 {
-    grid-column: 1;
-    font-style: italic;
-    margin-block: 0;
-  }
-
-  .published-date {
-    grid-column: 1;
-    font-style: italic;
-    font-size: 0.8rem;
-    padding-left: 10px;
-  }
-
-  .listening-to {
-    grid-column: 1;
-    padding-block: 10px;
-    justify-self: right;
-
-    @media (min-width: 1000px) {
-      grid-column: 2;
-    }
-  }
-
 }
 
+.article-data {
+  display: inherit;
+}
+
+h2 {
+  grid-column: 1;
+  font-style: italic;
+  margin-block: 0;
+  word-wrap: anywhere;
+}
+
+.published-date {
+  grid-column: 1;
+  font-style: italic;
+  font-size: 0.8rem;
+  padding-left: 10px;
+}

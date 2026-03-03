@@ -5,15 +5,12 @@ import {switchMap} from 'rxjs';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {DatePipe} from '@angular/common';
 import {ArticleNavigation} from '@app/features/article/components/article-navigation/article-navigation';
-import {Listening} from '@app/features/article/components/listening/listening';
 
 @Component({
   selector: 'app-article',
   imports: [
-    RouterLink,
     DatePipe,
-    ArticleNavigation,
-    Listening
+    ArticleNavigation
   ],
   templateUrl: './article.component.html',
   styleUrl: './article.component.scss',
