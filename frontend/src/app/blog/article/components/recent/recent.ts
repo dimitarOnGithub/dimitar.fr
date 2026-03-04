@@ -1,9 +1,8 @@
-import {Component, computed, inject, OnInit, Signal, signal, WritableSignal} from '@angular/core';
+import {Component, computed, inject, OnInit, signal} from '@angular/core';
 import {RouterLink} from '@angular/router';
-import {ArticleService} from '@app/features/article/services/article.service';
-import {ArticleData} from '@app/features/article/models/article.model';
-import {map, tap} from 'rxjs';
-import {toSignal} from '@angular/core/rxjs-interop';
+import {ArticleService} from '@app/blog/article/services/article.service';
+import {ArticleData} from '@app/blog/article/models/article.model';
+import {tap} from 'rxjs';
 
 
 @Component({
@@ -24,7 +23,7 @@ export class Recent implements OnInit {
   currentPage = signal(0);
   totalPages: number = 0;
 
-  contentLeft = computed(() => this.currentPage() + 1 != this.totalPages)
+  contentLeft = computed(() => this.currentPage() + 1 <= this.totalPages)
 
   ngOnInit() {
     // Get the data from the API

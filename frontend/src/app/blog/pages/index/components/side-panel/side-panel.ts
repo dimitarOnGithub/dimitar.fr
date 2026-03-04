@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {MiniPic} from '@app/pages/index/components/mini-pic/mini-pic';
+import {MiniPic} from '@app/blog/pages/index/components/mini-pic/mini-pic';
 
 @Component({
   selector: 'app-side-panel',

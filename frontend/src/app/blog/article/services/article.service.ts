@@ -1,7 +1,7 @@
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {inject, Injectable} from '@angular/core'
-import {ArticleData} from '@app/features/article/models/article.model';
-import {environment} from 'src/environments/environment';
+import {ArticleData} from '@app/blog/article/models/article.model';
+import {environment} from '@env/environment';
 import {PaginatedResponse} from '@app/shared/models/paginated.model';
 import {Observable} from 'rxjs';
 

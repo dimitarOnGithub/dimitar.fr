@@ -1,10 +1,10 @@
 import {Component, inject} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
-import {ArticleService} from '@app/features/article/services/article.service';
+import {ArticleService} from '@app/blog/article/services/article.service';
 import {switchMap} from 'rxjs';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {DatePipe} from '@angular/common';
-import {ArticleNavigation} from '@app/features/article/components/article-navigation/article-navigation';
+import {ArticleNavigation} from '@app/blog/article/components/article-navigation/article-navigation';
 
 @Component({
   selector: 'app-article',
