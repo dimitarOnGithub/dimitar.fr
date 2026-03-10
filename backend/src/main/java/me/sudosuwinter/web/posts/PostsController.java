@@ -4,13 +4,12 @@ import me.sudosuwinter.web.posts.dto.PostRequest;
 import me.sudosuwinter.web.posts.dto.PostResponse;
 import me.sudosuwinter.web.posts.exceptions.PostNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.web.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -25,8 +24,10 @@ public class PostsController {
     }
 
     @GetMapping("/posts")
-    public PagedModel<PostResponse> getPageablePost(@RequestParam(name = "page", defaultValue = "0") int currentPage) {
-        return new PagedModel<>(this.postService.getPostsByPage(currentPage));
+    public ResponseEntity<List<PostResponse>> getPosts() {
+        return ResponseEntity
+                .status(200)
+                .body(this.postService.getAllPosts());
     }
 
     @PostMapping("/posts")

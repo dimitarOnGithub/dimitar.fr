@@ -70,15 +70,6 @@ class PostsControllerTest {
     }
 
     @Test
-    void getPageablePost() throws Exception {
-        mockMvc.perform(get("/posts").queryParam("page", "0"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("content.length()").value(1))
-                .andExpect(jsonPath("content[0].title").value("Test Post 1"));
-    }
-
-    @Test
     void getNonexistentPost() throws Exception {
         mockMvc.perform(get("/posts/99999"))
                 .andExpect(status().isNotFound())

@@ -1,16 +1,28 @@
-<div class="article">
-  <div class="article-header">
-    <div class="article-data">
-      <h2>
-        {{ article().title }}
-      </h2>
-      <div class="published-date">
-        {{ article().publishedDate | date: 'EEEE, dd/MMM/yyyy' }}
+@let loading = article.isLoading();
+@let error = article.error();
+@let articleData = article.value();
+
+@if (articleData) {
+  <div class="article">
+    <div class="article-header">
+      <div class="article-data">
+        <h2>
+          {{ articleData.title }}
+        </h2>
+        <div class="published-date">
+          {{ articleData.publishedDate | date: 'EEEE, dd/MMM/yyyy' }}
+        </div>
       </div>
     </div>
+    <div class="article-content">
+      {{ articleData.content }}
+    </div>
   </div>
-  <div class="article-content">
-    {{ article().content }}
-  </div>
-</div>
+} @else if (loading) {
+  Loading article...
+} @else if (error) {
+  Uh, ran into some errors, sorry about that!
+} @else {
+  Dimitar sucks at Angular because something is clearly not working right :(
+}
 <app-article-navigation />

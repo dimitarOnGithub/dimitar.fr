@@ -7,5 +7,4 @@ public record PostResponse (
         String title,
         String content,
         ZonedDateTime publishedDate,
-        boolean isADraft){
-}
+        boolean isADraft){}

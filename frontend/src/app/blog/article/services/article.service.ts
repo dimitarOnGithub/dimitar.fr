@@ -2,8 +2,7 @@ import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {inject, Injectable} from '@angular/core'
 import {ArticleData} from '@app/blog/article/models/article.model';
 import {environment} from '@env/environment';
-import {PaginatedResponse} from '@app/shared/models/paginated.model';
-import {Observable} from 'rxjs';
+import {toSignal} from '@angular/core/rxjs-interop';
 
 
 @Injectable({providedIn: 'root'})
@@ -17,15 +16,11 @@ export class ArticleService {
       "Access-Control-Allow-Origin": "http://localhost:8080"
     }
   )
-
-  getArticlesByPage(page: number): Observable<PaginatedResponse<ArticleData>>  {
-    let httpParams: HttpParams = new HttpParams().set("page", page);
-    console.log(httpParams)
-    return this.http.get<PaginatedResponse<ArticleData>>(`${this.apiUrl}`, {
-      headers: this.httpHeaders,
-      params: httpParams
-    });
-  }
+  private articles$ = this.http.get<ArticleData[]>(
+    `${this.apiUrl}`,
+    { headers: this.httpHeaders }
+  );
+  articles = toSignal(this.articles$, { initialValue: [] })
 
   getById(articleId: number) {
     return this.http.get<ArticleData>(`${this.apiUrl}/${articleId}`, {
