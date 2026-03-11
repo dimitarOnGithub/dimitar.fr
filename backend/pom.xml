@@ -8,7 +8,7 @@
 		<version>4.0.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>me.sudosuwinter</groupId>
+	<groupId>fr.dimitar</groupId>
 	<artifactId>web</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>web</name>
