@@ -1,8 +1,8 @@
-import {Component, inject, input} from '@angular/core';
-import {ArticleService} from '@app/blog/article/services/article.service';
+import {Component, computed, inject, input} from '@angular/core';
+import {ArticleService} from '@app/article/article.service';
 import {rxResource} from '@angular/core/rxjs-interop';
 import {DatePipe} from '@angular/common';
-import {ArticleNavigation} from '@app/blog/article/components/article-navigation/article-navigation';
+import {ArticleNavigation} from '@app/article/components/article-navigation/article-navigation';
 
 @Component({
   selector: 'app-article',
@@ -18,8 +18,9 @@ export class ArticleComponent {
   private articleService: ArticleService = inject(ArticleService);
 
   id = input.required<number>();
+  articleId = computed(() => Number(this.id()))
   article = rxResource({
-    params: () => this.id(),
-    stream: ({ params }) => this.articleService.getById(params)
+    params: () => this.articleId(),
+    stream: ({ params }) => this.articleService.getArticleById(params)
   })
 }
