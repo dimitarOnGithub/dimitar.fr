@@ -4,11 +4,13 @@ import {RecentService} from '@app/pages/index/components/recent/recent.service';
 import {rxResource} from '@angular/core/rxjs-interop';
 import {map, tap} from 'rxjs';
 import {ArticleData} from '@app/article/article.model';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-recent',
   imports: [
-    RouterLink
+    RouterLink,
+    DatePipe
   ],
   templateUrl: './recent.html',
   styleUrl: './recent.scss',
@@ -21,7 +23,7 @@ export class Recent {
   visibleCount: WritableSignal<number> = signal(5)
   currentPage: WritableSignal<number> = signal(0)
   totalPages = signal(0)
-  contentLeft = computed(() => this.currentPage() <= this.totalPages() + 1)
+  contentLeft = computed(() => this.currentPage() + 1 < this.totalPages())
   articles = signal([] as ArticleData[])
   pageResource = rxResource({
     params: () => this.currentPage(),

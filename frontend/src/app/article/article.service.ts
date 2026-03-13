@@ -27,8 +27,4 @@ export class ArticleService {
       )
   }
 
-  getMultipleArticles(articlesId: Array<number>) {
-    const articlesMap = new Map();
-
-  }
 }

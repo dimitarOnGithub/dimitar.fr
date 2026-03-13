@@ -1,3 +1,17 @@
-<a [routerLink]="['/posts', '1']">Post 1</a>
-<a [routerLink]="['/posts', '2']">Post 2</a>
-<a [routerLink]="['/posts', '3']">Post 3</a>
+@let previous = previousArticle.value();
+@let next = nextArticle.value();
+
+<div class="article-navigation">
+  @if (previous){
+    <div class="previous-article" [routerLink]="['/posts', previous.id]">
+      <h3>{{ previous.title }}</h3>
+      <div class="article-date">{{ previous.publishedDate | date: 'dd/MMM/yyyy' }}</div>
+    </div>
+  }
+  @if (next){
+    <div class="next-article" [routerLink]="['/posts', next.id]">
+      <h3>{{ next.title }}</h3>
+      <div class="article-date">{{ next.publishedDate | date: 'dd/MMM/yyyy' }}</div>
+    </div>
+  }
+</div>

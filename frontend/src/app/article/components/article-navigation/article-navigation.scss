@@ -1,0 +1,62 @@
+.article-navigation {
+  display: flex;
+  margin-block: 50px;
+  padding-top: 10px;
+  padding-inline: 5px;
+  margin-inline: 5px;
+}
+
+.previous-article {
+  content: url("/assets/icons/arrow-left.png");
+  align-self: start;
+  margin-right: auto;
+  max-block-size: 35%;
+  max-inline-size: 35%;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  @media (min-width: 720px) {
+    content: none;
+    max-width: 45%;
+    align-self: start;
+    margin-right: auto;
+  }
+}
+
+.next-article {
+  content: url("/assets/icons/arrow-right.png");
+  align-self: end;
+  margin-left: auto;
+  max-block-size: 35%;
+  max-inline-size: 35%;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  @media (min-width: 720px) {
+    content: none;
+    max-width: 45%;
+    align-self: end;
+    margin-left: auto;
+  }
+}
+
+.article-date {
+  font-size: 0.7rem;
+  font-style: italic;
+  text-align: right;
+}
+
+h3 {
+  margin-block: 0;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+a:visited {
+  color: inherit;
+}

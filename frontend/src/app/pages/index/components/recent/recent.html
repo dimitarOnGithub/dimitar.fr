@@ -4,7 +4,7 @@
     <div class="item">
       <a [routerLink]="['/posts', article.id]">{{ article.title }}</a>
       <span class="breaker"></span>
-      <span class="item-date">Feb, 2026</span>
+      <span class="item-date">{{ article.publishedDate | date: 'dd MMM, yyy' }}</span>
   </div>
   } @empty {
     <p>No recent articles found.</p>
