@@ -17,4 +17,9 @@ public interface PostService {
 
     Optional<PostResponse> getPostById(Long postId);
 
+    Optional<PostResponse> findPrevious(Long postId);
+
+    Optional<PostResponse> findNext(Long postId);
+
+
 }

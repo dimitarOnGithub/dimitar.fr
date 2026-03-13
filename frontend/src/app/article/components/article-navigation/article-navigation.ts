@@ -22,14 +22,14 @@ export class ArticleNavigation {
   currentArticleId = computed(() => Number(this.id()));
   previousArticle = rxResource({
     params: () => this.currentArticleId(),
-    stream: ({params}) => this.articleService.getArticleById(params - 1)
+    stream: ({params}) => this.articleService.getPreviousArticle(params)
       .pipe(
         catchError(() => of(null))
       )
   })
   nextArticle = rxResource({
     params: () => this.currentArticleId(),
-    stream: ({params}) => this.articleService.getArticleById(params + 1)
+    stream: ({params}) => this.articleService.getNextArticle(params)
       .pipe(
         catchError(() => of(null))
       )

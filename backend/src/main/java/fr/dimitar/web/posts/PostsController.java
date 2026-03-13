@@ -51,4 +51,20 @@ public class PostsController {
         return ResponseEntity.of(post);
     }
 
+    @GetMapping("/posts/{id}/previous")
+    public ResponseEntity<?> getPreviousPost(@PathVariable Long id){
+        Optional<PostResponse> post = this.postService.findPrevious(id);
+        return ResponseEntity.ok(
+                post.orElseThrow(() -> new PostNotFoundException(id))
+        );
+    }
+
+    @GetMapping("/posts/{id}/next")
+    public ResponseEntity<?> getNextPost(@PathVariable Long id){
+        Optional<PostResponse> post = this.postService.findNext(id);
+        return ResponseEntity.ok(
+                post.orElseThrow(() -> new PostNotFoundException(id))
+        );
+    }
+
 }

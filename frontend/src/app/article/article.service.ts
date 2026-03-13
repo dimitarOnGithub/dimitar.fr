@@ -27,4 +27,24 @@ export class ArticleService {
       )
   }
 
+  getPreviousArticle(id: number) {
+    return this.http.get<ArticleData>(`${this.apiUrl}/${id}/previous`)
+      .pipe(
+        tap(
+          data => this.articlesCache.addArticle(data)
+        ),
+        shareReplay(1)
+      )
+  }
+
+  getNextArticle(id: number) {
+    return this.http.get<ArticleData>(`${this.apiUrl}/${id}/next`)
+      .pipe(
+        tap(
+          data => this.articlesCache.addArticle(data)
+        ),
+        shareReplay(1)
+      )
+  }
+
 }

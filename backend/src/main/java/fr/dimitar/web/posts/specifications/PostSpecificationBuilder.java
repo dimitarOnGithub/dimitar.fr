@@ -14,6 +14,8 @@ public class PostSpecificationBuilder {
             spec = spec.and(PostSpecification.postIdsIn(filter.getId()));
         }
 
+        spec = spec.and(PostSpecification.includeDrafts(filter.isIncludeDrafts()));
+
         return spec;
     }
 }

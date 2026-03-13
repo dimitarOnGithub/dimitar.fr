@@ -7,10 +7,7 @@ import fr.dimitar.web.posts.mapper.PostMapper;
 import fr.dimitar.web.posts.specifications.PostSpecificationBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,7 +39,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Page<PostResponse> getPosts(PostsFilter postsFilter) {
-        Sort sort = Sort.by(Sort.Direction.ASC, "publishedDate");
+        Sort sort = Sort.by(Sort.Direction.DESC, "publishedDate");
         Pageable pageable = PageRequest.of(postsFilter.getPage(), postsFilter.getPageSize(), sort);
 
         Specification<Post> specification = PostSpecificationBuilder.fromFilter(postsFilter);
@@ -53,6 +50,18 @@ public class PostServiceImpl implements PostService {
     @Override
     public Optional<PostResponse> getPostById(Long postId) {
         Optional<Post> post = this.postsRepository.findById(postId);
+        return post.map(PostMapper::fromEntityToResponse);
+    }
+
+    @Override
+    public Optional<PostResponse> findPrevious(Long postId) {
+        Optional<Post> post = this.postsRepository.findPrevious(postId, Limit.of(1));
+        return post.map(PostMapper::fromEntityToResponse);
+    }
+
+    @Override
+    public Optional<PostResponse> findNext(Long postId) {
+        Optional<Post> post = this.postsRepository.findNext(postId, Limit.of(1));
         return post.map(PostMapper::fromEntityToResponse);
     }
 

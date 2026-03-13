@@ -13,6 +13,11 @@ public class PostSpecification {
         return (root, query, cb) -> root.get("id").in(ids);
     }
 
-
+    public static Specification<Post> includeDrafts(boolean includeDraftPosts) {
+        return (
+                (root, query, criteriaBuilder)
+                        -> root.get("isDraft").equalTo(includeDraftPosts)
+        );
+    }
 
 }
