@@ -9,6 +9,21 @@
   }
 }
 
-p {
+.footer {
   text-align: right;
+  padding-inline: 10px;
+  margin-bottom: 25px;
+  margin-top: 10px
+}
+
+.separator {
+  margin-inline: 5px;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: inherit;
 }

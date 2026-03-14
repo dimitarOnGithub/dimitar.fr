@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import {ArticleComponent} from '@app/article/article.component';
+import {Contact} from '@app/contact/contact';
 
 export const routes: Routes = [
   {
@@ -25,5 +26,9 @@ export const routes: Routes = [
   {
     path: 'posts/:id',
     component: ArticleComponent
+  },
+  {
+    path: 'contact',
+    component: Contact
   }
 ];

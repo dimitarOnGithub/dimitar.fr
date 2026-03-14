@@ -1,0 +1,35 @@
+<div class="contact">
+  <h2>Get In Touch</h2>
+  <form class="contact-form" (submit)="onSubmit($event)">
+    <label class="message-label">Message
+      <div class="message-box">
+        <textarea autocomplete="off" placeholder="Your message" [formField]="contactForm.message"></textarea>
+      </div>
+      @if (contactForm.message().touched() && contactForm.message().invalid()) {
+        <div class="error">
+          @for (error of contactForm.message().errors(); track error.kind) {
+            <span>{{ error.message }}</span>
+          }
+        </div>
+      }
+    </label>
+    <label class="name-label">Name
+      <div class="name">
+        <input type="text" autocomplete="off" placeholder="Your name" [formField]="contactForm.name">
+      </div>
+    </label>
+    <label class="email-label">Email
+      <div class="email">
+        <input type="email" autocomplete="off" placeholder="Your email address" [formField]="contactForm.email">
+      </div>
+      @if (contactForm.email().touched() && contactForm.email().invalid()) {
+        <div class="error">
+          @for (error of contactForm.email().errors(); track error.kind) {
+            <span>{{ error.message }}</span>
+          }
+        </div>
+      }
+    </label>
+    <input type="submit" value="Here Goes Nothing" [disabled]="contactForm().invalid()">
+  </form>
+</div>
