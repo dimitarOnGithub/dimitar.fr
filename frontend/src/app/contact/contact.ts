@@ -1,6 +1,5 @@
 import {Component, inject, signal} from '@angular/core';
 import {email, form, FormField, required} from '@angular/forms/signals';
-import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-contact',
@@ -11,8 +10,6 @@ import {Location} from '@angular/common';
   styleUrl: './contact.scss',
 })
 export class Contact {
-
-  private location = inject(Location);
 
   contactModel = signal({
     message: '',
