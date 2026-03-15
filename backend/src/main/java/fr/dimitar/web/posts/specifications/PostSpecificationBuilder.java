@@ -10,11 +10,7 @@ public class PostSpecificationBuilder {
     public static Specification<Post> fromFilter(PostsFilter filter) {
         Specification<Post> spec = Specification.allOf();
 
-        if(!filter.getId().isEmpty()) {
-            spec = spec.and(PostSpecification.postIdsIn(filter.getId()));
-        }
-
-        spec = spec.and(PostSpecification.includeDrafts(filter.isIncludeDrafts()));
+        spec = spec.and(PostSpecification.draftsOnly(filter.isDraftsOnly()));
 
         return spec;
     }

@@ -39,7 +39,6 @@ public class SecurityConfig {
     public SecurityFilterChain postsChain(HttpSecurity httpSecurity) {
         httpSecurity
                 .securityMatcher("/posts/**")
-                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/posts").authenticated()
                         .requestMatchers(HttpMethod.PUT, "/posts/**").authenticated()
@@ -54,7 +53,6 @@ public class SecurityConfig {
     @Order(2)
     public SecurityFilterChain authChain(HttpSecurity httpSecurity){
         httpSecurity
-                .csrf(csrf -> csrf.disable())
                 .securityMatcher("/auth", "/myself")
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/auth").permitAll()
@@ -70,6 +68,17 @@ public class SecurityConfig {
 
     @Bean
     @Order(3)
+    public SecurityFilterChain draftsChain(HttpSecurity httpSecurity) {
+        httpSecurity
+                .securityMatcher("/drafts/**")
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/drafts").authenticated()
+                );
+        return httpSecurity.build();
+    }
+
+    @Bean
+    @Order(4)
     public SecurityFilterChain homeChain(HttpSecurity httpSecurity) {
         httpSecurity
                 .securityMatcher("/")

@@ -15,6 +15,8 @@ public interface PostService {
 
     Page<PostResponse> getPosts(PostsFilter postsFilter);
 
+    Page<PostResponse> getDrafts(PostsFilter postsFilter);
+
     Optional<PostResponse> getPostById(Long postId);
 
     Optional<PostResponse> findPrevious(Long postId);

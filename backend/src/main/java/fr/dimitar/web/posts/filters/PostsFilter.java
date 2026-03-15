@@ -4,23 +4,12 @@ import java.util.List;
 
 public class PostsFilter {
 
-    // Specific posts
-    private List<Integer> id = List.of();
-
     // Pagination
     private Integer page = 0;
     private Integer pageSize = 5;
 
     // Drafts
-    private boolean includeDrafts = false;
-
-    public List<Integer> getId() {
-        return id;
-    }
-
-    public void setId(List<Integer> id) {
-        this.id = id;
-    }
+    private boolean draftsOnly = false;
 
     public Integer getPage() {
         return page;
@@ -38,12 +27,12 @@ public class PostsFilter {
         this.pageSize = pageSize;
     }
 
-    public boolean isIncludeDrafts() {
-        return includeDrafts;
+    public boolean isDraftsOnly() {
+        return draftsOnly;
     }
 
-    public void setIncludeDrafts(boolean includeDrafts) {
-        this.includeDrafts = includeDrafts;
+    public void setDraftsOnly(boolean draftsOnly) {
+        this.draftsOnly = draftsOnly;
     }
 
 }

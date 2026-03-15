@@ -4,12 +4,14 @@ import fr.dimitar.web.config.TestConfig;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
@@ -18,10 +20,11 @@ import java.net.URI;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(PostsController.class)
+@SpringBootTest
 @Import(TestConfig.class)
 @ActiveProfiles("test")
 @AutoConfigureMockMvc(addFilters = false)
+@Sql(scripts={"classpath:data.sql"})
 class PostsControllerTest {
 
     @Autowired
@@ -59,13 +62,12 @@ class PostsControllerTest {
     }
 
     @Test
-    @WithMockUser
     void getPostById() throws Exception {
         mockMvc.perform(get("/posts/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("title").exists())
-                .andExpect(jsonPath("title").value("Test Post 1"));
+                .andExpect(jsonPath("title").value("Test Post ID: 1"));
 
     }
 
@@ -75,4 +77,29 @@ class PostsControllerTest {
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_PROBLEM_JSON));
     }
+
+    @Test
+    void getPreviousPost() throws Exception {
+        mockMvc.perform(get("/posts/3/previous"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("id").value(1));
+    }
+
+    @Test
+    void getNextPost() throws Exception {
+        mockMvc.perform(get("/posts/3/next"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("id").value(5));
+    }
+
+    @Test
+    void getDraftPosts() throws Exception {
+        mockMvc.perform(get("/drafts"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.page.totalElements").value(3));
+    }
+
 }

@@ -3,68 +3,72 @@ package fr.dimitar.web.posts;
 import fr.dimitar.web.posts.dto.PostRequest;
 import fr.dimitar.web.posts.dto.PostResponse;
 import fr.dimitar.web.posts.filters.PostsFilter;
+import fr.dimitar.web.posts.mapper.PostMapper;
+import fr.dimitar.web.posts.specifications.PostSpecificationBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.*;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
-import java.time.ZoneId;
 import java.util.*;
 
 @Service
 @Profile("test")
 public class TestPostsService implements PostService {
 
-    private final List<PostResponse> postsRepo = new ArrayList<>();
-
-    public TestPostsService() {
-        this.postsRepo.add(
-                new PostResponse(
-                        1L, "Test Post 1", "Test",
-                        Instant.now().atZone(ZoneId.of("Europe/Paris")),
-                        false)
-        );
-        this.postsRepo.add(
-                new PostResponse(
-                2L, "Test Post 2", "Test",
-                        Instant.now().atZone(ZoneId.of("Europe/Paris")),
-                false)
-        );
-    }
+    @Autowired
+    private PostsRepository repository;
 
     @Override
     public PostResponse publishPost(PostRequest post) {
-        Long lastId = (long) this.postsRepo.size();
-        PostResponse postResponse = new PostResponse(
-                lastId + 1,
-                post.getTitle(),
-                post.getContent(),
-                Instant.now().atZone(ZoneId.of("Europe/Paris")),
-                post.isADraft()
-        );
-        this.postsRepo.add(postResponse);
-        return postResponse;
+        Post createdPost = this.repository.saveAndFlush(PostMapper.fromRequestToEntity(post));
+        return PostMapper.fromEntityToResponse(createdPost);
     }
 
     @Override
     public void deletePost(Long postId) {
-        this.postsRepo.removeIf(postResponse -> postResponse.id().equals(postId));
+        this.repository.deleteById(postId);
     }
 
     @Override
     public Page<PostResponse> getPosts(PostsFilter postsFilter) {
-        return new PageImpl<>(this.postsRepo);
+        Sort sort = Sort.by(Sort.Direction.DESC, "publishedDate");
+        Pageable pageable = PageRequest.of(postsFilter.getPage(), postsFilter.getPageSize(), sort);
+
+        postsFilter.setDraftsOnly(false);
+        Specification<Post> specification = PostSpecificationBuilder.fromFilter(postsFilter);
+
+        return this.repository.findAll(specification, pageable).map(PostMapper::fromEntityToResponse);
+    }
+
+    @Override
+    public Page<PostResponse> getDrafts(PostsFilter postsFilter) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "publishedDate");
+        Pageable pageable = PageRequest.of(postsFilter.getPage(), postsFilter.getPageSize(), sort);
+
+        postsFilter.setDraftsOnly(true);
+        Specification<Post> specification = PostSpecificationBuilder.fromFilter(postsFilter);
+
+        return this.repository.findAll(specification, pageable).map(PostMapper::fromEntityToResponse);
     }
 
     @Override
     public Optional<PostResponse> getPostById(Long postId) {
-        for(var p: this.postsRepo){
-            if(p.id().equals(postId)){
-                return Optional.of(p);
-            }
-        }
-        return Optional.empty();
+        Optional<Post> post = this.repository.findById(postId);
+        return post.map(PostMapper::fromEntityToResponse);
+    }
+
+    @Override
+    public Optional<PostResponse> findPrevious(Long postId) {
+        Optional<Post> post = this.repository.findPrevious(postId, Limit.of(1));
+        return post.map(PostMapper::fromEntityToResponse);
+    }
+
+    @Override
+    public Optional<PostResponse> findNext(Long postId) {
+        Optional<Post> post = this.repository.findNext(postId, Limit.of(1));
+        return post.map(PostMapper::fromEntityToResponse);
     }
 
 }

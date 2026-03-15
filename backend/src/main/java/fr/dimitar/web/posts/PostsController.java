@@ -42,6 +42,12 @@ public class PostsController {
                 .build();
     }
 
+    @GetMapping("/drafts")
+    public PagedModel<PostResponse> getDrafts(PostsFilter postsFilter){
+        return new PagedModel<>(this.postService.getDrafts(postsFilter));
+    }
+
+
     @GetMapping("/posts/{id}")
     public ResponseEntity<?> getPostById(@PathVariable Long id){
         Optional<PostResponse> post = this.postService.getPostById(id);

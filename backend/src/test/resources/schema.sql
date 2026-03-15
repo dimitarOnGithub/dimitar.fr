@@ -8,6 +8,7 @@ CREATE TABLE blog_test.posts (
     is_draft int(1) NOT NULL CHECK (is_draft in (0, 1))
 );
 
+DROP TABLE blog_test.users;
 
 CREATE TABLE blog_test.users (
     id INT PRIMARY KEY UNIQUE AUTO_INCREMENT,

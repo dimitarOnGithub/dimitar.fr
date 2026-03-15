@@ -42,6 +42,18 @@ public class PostServiceImpl implements PostService {
         Sort sort = Sort.by(Sort.Direction.DESC, "publishedDate");
         Pageable pageable = PageRequest.of(postsFilter.getPage(), postsFilter.getPageSize(), sort);
 
+        postsFilter.setDraftsOnly(false);
+        Specification<Post> specification = PostSpecificationBuilder.fromFilter(postsFilter);
+
+        return this.postsRepository.findAll(specification, pageable).map(PostMapper::fromEntityToResponse);
+    }
+
+    @Override
+    public Page<PostResponse> getDrafts(PostsFilter postsFilter) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "publishedDate");
+        Pageable pageable = PageRequest.of(postsFilter.getPage(), postsFilter.getPageSize(), sort);
+
+        postsFilter.setDraftsOnly(true);
         Specification<Post> specification = PostSpecificationBuilder.fromFilter(postsFilter);
 
         return this.postsRepository.findAll(specification, pageable).map(PostMapper::fromEntityToResponse);
