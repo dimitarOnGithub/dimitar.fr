@@ -18,6 +18,7 @@ body {
       rgba(255, 160, 177, 0.1),
       rgb(255, 105, 180, 0.6)
   );
+  border-radius: 0.4em 0 0.7em 0;
   color: #292626;
   padding-right: 3px;
   text-decoration: none;
@@ -33,4 +34,12 @@ body {
 
 .highlight:visited {
   color: purple;
+}
+
+.content {
+  white-space: pre-line;
+}
+
+::selection {
+  background-color: rgb(255, 105, 180, 0.4);
 }

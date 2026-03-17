@@ -1,0 +1,53 @@
+<div class="guestbook">
+  <div class="about">
+    <p>
+      Back when I was growing up (albeit late by the standards of the true old timers), stuff like guestbooks, shoutout boxes and forums, was cool.
+    </p>
+    <p>
+      Although I truly doubt we'd ever be able to recapture those times, I'm glad I had the pleasure of seeing them and living through them; the times
+      when the internet wasn't this overreaching entity but rather a place to be explored; a place where we didn't hide behind personas but rather used
+      them as an avatar of who we were behind the keyboard; a place where meeting someone from the other side of the world wasn't a daily occurrence and
+      was something we eagerly cherished.
+    </p>
+    <p>
+      It was either that or I'm truly having an old man yells at the clouds moment. Either way, you can leave a message, if you'd like - the form is at
+      the bottom of this page. :)
+    </p>
+  </div>
+  <app-entries-list />
+  <div class="guestbook-form">
+    @if (formSubmitted()) {
+      <p>
+        Thank you for dropping a message! Unfortunately, the internet is not what it used to be, so I'll have to approve your entry before it shows up
+        on here.
+      </p>
+    } @else if (errorMessage()) {
+      {{ errorMessage() }}
+    } @else {
+      <form (submit)="onSubmit($event)">
+        <label>Your Message
+          <textarea class="message" [formField]="guestBookForm.content" placeholder="Plain text only, please, input sanitization is not my forte"></textarea>
+        </label>
+        <label>Name
+          <input type="text" class="name" [formField]="guestBookForm.username" placeholder="This will appear next to your entry">
+        </label>
+        @if (!guestBookForm.username().touched()) {
+          <p>This is an optional field, if left empty, your entry will be displayed as anonymous</p>
+        }
+        <label class="alias">Alias
+          <input type="text" [formField]="guestBookForm.alias" placeholder="Do you have an alias you go by?">
+        </label>
+        @if (guestBookForm.username().value()) {
+          <label>Your Corner of the Web</label>
+          <input type="url" [formField]="guestBookForm.userWebsite" placeholder="Link to your place on the net">
+          @if (!guestBookForm.userWebsite().touched()) {
+            <p>Also optional, if filled, your entry will link to your page!</p>
+          }
+        }
+        <div class="button-wrap">
+          <input type="submit" value="Here Goes Nothing" [disabled]="guestBookForm().invalid() || guestBookForm().pending()">
+        </div>
+      </form>
+    }
+  </div>
+</div>

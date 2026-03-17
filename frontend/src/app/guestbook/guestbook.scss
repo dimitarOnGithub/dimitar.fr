@@ -1,0 +1,77 @@
+.guestbook {
+  margin-block: 10px;
+  padding-inline: 5px;
+}
+
+.about {
+  border-bottom: 1px solid #505050;
+  p {
+    font-size: 0.9rem;
+    text-indent: 15px;
+  }
+}
+
+.guestbook-form {
+  border-top: 1px solid #505050;
+  margin-block: 25px;
+  padding-block: 25px;
+}
+
+label {
+  &.alias {
+    display: none;
+  }
+}
+
+textarea {
+  width: stretch;
+  height: 250px;
+  padding: 10px;
+  resize: vertical;
+  border: 1px solid #505050;
+  border-radius: 5px;
+  font-size: inherit;
+  font-family: inherit;
+  margin-block: 10px;
+}
+
+textarea:focus {
+  box-shadow:
+    3px 1px 1px #505050,
+    -3px 1px 1px #505050;
+  outline: none;
+}
+
+input[type=submit] {
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding-block: 25px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.button-wrap {
+  text-align: center;
+}
+
+input[type=text], input[type=url] {
+  padding-inline: 10px;
+  width: stretch;
+  height: 1.3rem;
+  border: 1px solid #505050;
+  border-radius: 5px;
+  font-size: 0.7rem;
+  font-family: inherit;
+
+  &:focus {
+    box-shadow:
+      3px 1px 1px #505050,
+      -3px 1px 1px #505050;
+    outline: none;
+  }
+}

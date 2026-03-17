@@ -1,0 +1,25 @@
+<div class="entry-list">
+  @for (entry of entries(); track entry.content) {
+    <div class="entry">
+      <div class="entry-content content">
+        <p>{{ entry.content }}</p>
+      </div>
+      <div class="entry-details">
+        @if (entry.username) {
+          @if (entry.userWebsite) {
+            <a class="highlight" href="{{ entry.userWebsite }}" target="_blank">{{entry.username}}</a>
+          }
+        } @else {
+          Anonymous
+        }
+      </div>
+    </div>
+  } @empty {
+    No guestbook entries found :(
+  }
+  @if (contentLeft()) {
+    <div class="button-wrap">
+      <button (click)="loadNext()">Load More</button>
+    </div>
+  }
+</div>

@@ -1,0 +1,46 @@
+.entry-list {
+  margin-block: 10px;
+}
+
+.entry {
+  margin-bottom: 10px;
+}
+
+.entry-content {
+  font-size: 1.1rem;
+  font-style: italic;
+  text-align: left;
+}
+
+.entry-details {
+  font-size: 0.8rem;
+  text-align: right;
+  border-top: 1px solid black;
+  padding-top: 3px;
+  padding-right: 5px;
+  inline-size: fit-content;
+  margin-left: auto;
+}
+
+p {
+  margin-block: 0;
+  padding: 5px;
+  text-indent: 0.5rem;
+}
+
+button {
+  border: none;
+  background: none;
+  margin-left: auto;
+  font-size: 1.2rem;
+  font-family: inherit;
+  font-weight: bold;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.button-wrap {
+  text-align: center;
+}
