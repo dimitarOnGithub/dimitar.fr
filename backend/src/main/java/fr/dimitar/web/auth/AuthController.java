@@ -2,68 +2,59 @@ package fr.dimitar.web.auth;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import fr.dimitar.web.auth.dto.AuthResponse;
 import fr.dimitar.web.auth.dto.LoginRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
 
 @RestController
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
 
-    private final PasswordEncoder passwordEncoder;
-
-    private final UserService userDetailsService;
-
-    @Autowired
-    public AuthController(AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder,
-                          UserService userDetailsService) {
+    public AuthController(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
-        this.passwordEncoder = passwordEncoder;
-        this.userDetailsService = userDetailsService;
     }
 
     @PostMapping("/auth")
-    ResponseEntity<?> loginEndpoint(@RequestBody LoginRequest loginRequest, HttpServletRequest request) {
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest, HttpServletRequest request) {
+
+        // Authenticate
+        UsernamePasswordAuthenticationToken token =
+                new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password());
+
         try {
-            UsernamePasswordAuthenticationToken authenticationToken =
-                    new UsernamePasswordAuthenticationToken(
-                            loginRequest.username(),
-                            loginRequest.password()
-                    );
+            Authentication auth = authenticationManager.authenticate(token);
 
-            Authentication authentication = authenticationManager.authenticate(authenticationToken);
+            // Store authentication in SecurityContext
+            SecurityContextHolder.getContext().setAuthentication(auth);
 
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-
+            // Create session (if not exists)
             HttpSession session = request.getSession(true);
-            String sessionId = session.getId();
             session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
 
-            return ResponseEntity.ok(new AuthResponse(sessionId));
+            return ResponseEntity.ok(Map.of("status", "ok"));
         } catch (AuthenticationException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication failed: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("error", "Authentication failed"));
         }
     }
 
     @GetMapping("/myself")
-    Object currentUser() {
-        Object var = SecurityContextHolder.getContext();
-        System.out.println(var);
-        return var;
+    public ResponseEntity<?> getCurrentUser(@AuthenticationPrincipal UserDetails userDetails) {
+        return ResponseEntity.status(200).body(Map.of("username", userDetails.getUsername()));
     }
 
 }
