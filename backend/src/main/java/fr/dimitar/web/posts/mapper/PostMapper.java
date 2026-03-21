@@ -1,6 +1,7 @@
 package fr.dimitar.web.posts.mapper;
 
 import fr.dimitar.web.posts.Post;
+import fr.dimitar.web.posts.dto.PostModel;
 import fr.dimitar.web.posts.dto.PostRequest;
 import fr.dimitar.web.posts.dto.PostResponse;
 
@@ -21,6 +22,16 @@ public interface PostMapper {
                 postRequest.getTitle(),
                 postRequest.getContent(),
                 postRequest.isADraft()
+        );
+    }
+
+    static PostModel fromEntityToModel(Post post){
+        return new PostModel(
+                post.getId(),
+                post.getTitle(),
+                post.getContent(),
+                post.getPublishedDate(),
+                post.isADraft()
         );
     }
 }

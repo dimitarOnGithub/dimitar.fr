@@ -1,0 +1,139 @@
+.main-content {
+  display: grid;
+
+  @media (min-width: 720px) {
+    grid-template-columns: 7fr 3fr;
+  }
+
+}
+
+.left-column {
+  padding-inline: 5px;
+  margin-inline: 5px;
+}
+
+.text-area {
+  border-style: solid;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 1px solid #4b4b4e;
+}
+
+.right-column {
+  margin-block: 5px;
+  padding-inline: 5px;
+
+  @media (min-width: 720px) {
+    padding-left: 30px;
+    border-style: solid;
+    border-top: 0;
+    border-right: 0;
+    border-left: 1px solid #4b4b4e;
+    border-bottom: 0;
+  }
+}
+
+p {
+  margin: 7px;
+}
+
+.recent-updates {
+    display: grid;
+
+    a {
+        font-style: italic;
+        font-weight: bold;
+        font-size: 1.3rem;
+        margin-block: 0;
+        color: #292626;
+        text-decoration: none;
+        justify-content: flex-end;
+    }
+
+    button {
+        border: none;
+        background: none;
+        justify-self: center;
+        font-size: 1.2rem;
+        font-family: inherit;
+        font-weight: bold;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.item {
+  display: flex;
+  margin-block: 10px;
+  align-items: first baseline;
+
+  .breaker {
+    flex-grow: 1;
+    height: 0.9rem;
+    border-bottom: 1px dotted black;
+    margin-inline: 2px;
+  }
+
+  .item-date {
+    flex-shrink: 0;
+  }
+
+}
+
+.side-panel {
+  display: grid;
+  font-size: 1rem;
+  grid-template-columns: 1fr;
+
+  @media (min-width: 720px) {
+    font-size: 1.1rem;
+    column-gap: 1rem;
+    gap: 1px;
+    position: sticky;
+    top: 0;
+    padding-top: 5px;
+    padding-inline-end: 10px;
+  }
+}
+
+.side-panel-text {
+  p {
+    margin-block: 0;
+  }
+
+  @media (max-width: 720px) {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid #4b4b4e;
+  }
+}
+
+.profile-pic {
+  display: none;
+  border-radius: 30px;
+  max-inline-size: 100%;
+  max-height: 210px;
+  max-width: 360px;
+
+  @media (min-width: 720px) {
+    display: block;
+    max-height: 100%;
+    max-width: 100%;
+  }
+}
+
+.description {
+  display: inline-block;
+  text-align: left;
+}
+
+.social-links {
+  margin-top: 25px;
+
+  a {
+    padding-inline: 2px;
+  }
+}
