@@ -1,5 +1,7 @@
-package fr.dimitar.web.posts;
+package fr.dimitar.web.posts.services;
 
+import fr.dimitar.web.posts.Post;
+import fr.dimitar.web.posts.PostsRepository;
 import fr.dimitar.web.posts.dto.PostRequest;
 import fr.dimitar.web.posts.dto.PostResponse;
 import fr.dimitar.web.posts.filters.PostsFilter;

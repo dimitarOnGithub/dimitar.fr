@@ -8,10 +8,7 @@ import fr.dimitar.web.posts.filters.PostsFilter;
 import fr.dimitar.web.posts.mapper.PostMapper;
 import fr.dimitar.web.posts.specifications.PostSpecificationBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -46,15 +43,19 @@ public class JtePostService {
         return null;
     }
 
-    public Optional<PostResponse> getPostById(Long postId) {
-        return Optional.empty();
+    public Optional<PostModel> getPostById(Long postId) {
+        return Optional.of(
+                PostMapper.fromEntityToModel(this.postsRepository.getReferenceById(postId))
+        );
     }
 
-    public Optional<PostResponse> findPrevious(Long postId) {
-        return Optional.empty();
+    public Optional<PostModel> findPrevious(Long postId) {
+        Optional<Post> post = this.postsRepository.findPrevious(postId, Limit.of(1));
+        return post.map(PostMapper::fromEntityToModel);
     }
 
-    public Optional<PostResponse> findNext(Long postId) {
-        return Optional.empty();
+    public Optional<PostModel> findNext(Long postId) {
+        Optional<Post> post = this.postsRepository.findNext(postId, Limit.of(1));
+        return post.map(PostMapper::fromEntityToModel);
     }
 }

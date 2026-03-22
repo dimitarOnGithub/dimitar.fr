@@ -3,6 +3,7 @@ package fr.dimitar.web.guestbook;
 import fr.dimitar.web.guestbook.dto.GuestbookRequest;
 import fr.dimitar.web.guestbook.dto.GuestbookResponse;
 import fr.dimitar.web.guestbook.filters.GuestbookFilter;
+import fr.dimitar.web.guestbook.services.APIGuestbookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.web.PagedModel;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +19,12 @@ public class GuestbookController {
         this.guestbookService = guestbookService;
     }
 
-    @GetMapping("/guestbook")
+    @GetMapping("/api/guestbook")
     public PagedModel<GuestbookResponse> getGuestbook(GuestbookFilter guestbookFilter) {
         return new PagedModel<>(this.guestbookService.getGuestbook(guestbookFilter));
     }
 
-    @PostMapping("/guestbook")
+    @PostMapping("/api/guestbook")
     public ResponseEntity<?> postGuestbook(@RequestBody GuestbookRequest guestbookRequest){
         this.guestbookService.postGuestbook(guestbookRequest);
         return ResponseEntity.status(201).build();

@@ -1,0 +1,101 @@
+.article {
+  padding-inline: 5px;
+  margin-block: 32px;
+}
+
+.article-header {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-row-gap: 10px;
+}
+@media (min-width: 720px) {
+  .article-header {
+    grid-template-columns: 7fr auto;
+  }
+}
+
+.article-data {
+  display: inherit;
+}
+
+h2 {
+  grid-column: 1;
+  font-style: italic;
+  margin-block: 0;
+  word-wrap: anywhere;
+}
+
+.published-date {
+  grid-column: 1;
+  font-style: italic;
+  font-size: 0.8rem;
+  padding-left: 10px;
+}
+
+.article-navigation {
+  display: flex;
+  margin-block: 50px;
+  padding-top: 10px;
+  padding-inline: 5px;
+  margin-inline: 5px;
+}
+.article-navigation a {
+  color: inherit;
+  text-decoration: none;
+}
+.article-navigation a:visited {
+  color: inherit;
+}
+
+.previous-article {
+  content: url("/icons/arrow-left.png");
+  align-self: start;
+  margin-right: auto;
+  max-block-size: 35%;
+  max-inline-size: 35%;
+}
+.previous-article:hover {
+  cursor: pointer;
+}
+@media (min-width: 720px) {
+  .previous-article {
+    content: none;
+    max-width: 45%;
+    align-self: start;
+    margin-right: auto;
+  }
+}
+
+.next-article {
+  content: url("/icons/arrow-right.png");
+  align-self: end;
+  margin-left: auto;
+  max-block-size: 35%;
+  max-inline-size: 35%;
+}
+.next-article:hover {
+  cursor: pointer;
+}
+@media (min-width: 720px) {
+  .next-article {
+    content: none;
+    max-width: 45%;
+    align-self: end;
+    margin-left: auto;
+  }
+}
+
+.article-date {
+  font-size: 0.7rem;
+  font-style: italic;
+  text-align: right;
+}
+
+h3 {
+  margin-block: 0;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/*# sourceMappingURL=article.css.map */

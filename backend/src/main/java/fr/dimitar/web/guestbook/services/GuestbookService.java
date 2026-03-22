@@ -1,4 +1,4 @@
-package fr.dimitar.web.guestbook;
+package fr.dimitar.web.guestbook.services;
 
 import fr.dimitar.web.guestbook.dto.GuestbookRequest;
 import fr.dimitar.web.guestbook.dto.GuestbookResponse;

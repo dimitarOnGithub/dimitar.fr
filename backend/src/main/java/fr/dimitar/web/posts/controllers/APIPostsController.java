@@ -1,5 +1,6 @@
-package fr.dimitar.web.posts;
+package fr.dimitar.web.posts.controllers;
 
+import fr.dimitar.web.posts.services.PostService;
 import fr.dimitar.web.posts.dto.PostRequest;
 import fr.dimitar.web.posts.dto.PostResponse;
 import fr.dimitar.web.posts.exceptions.PostNotFoundException;
@@ -15,21 +16,21 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200/")
-public class PostsController {
+public class APIPostsController {
 
     private final PostService postService;
 
     @Autowired
-    public PostsController(PostService postService){
+    public APIPostsController(PostService postService){
         this.postService = postService;
     }
 
-    @GetMapping("/posts")
+    @GetMapping("/api/posts")
     public PagedModel<PostResponse> getPosts(PostsFilter postsFilter) {
         return new PagedModel<>(this.postService.getPosts(postsFilter));
     }
 
-    @PostMapping("/posts")
+    @PostMapping("/api/posts")
     public ResponseEntity<?> publishPost(@RequestBody PostRequest newPost) {
         PostResponse postResponse = this.postService.publishPost(newPost);
         URI location = ServletUriComponentsBuilder
@@ -42,13 +43,13 @@ public class PostsController {
                 .build();
     }
 
-    @GetMapping("/drafts")
+    @GetMapping("/api/drafts")
     public PagedModel<PostResponse> getDrafts(PostsFilter postsFilter){
         return new PagedModel<>(this.postService.getDrafts(postsFilter));
     }
 
 
-    @GetMapping("/posts/{id}")
+    @GetMapping("/api/posts/{id}")
     public ResponseEntity<?> getPostById(@PathVariable Long id){
         Optional<PostResponse> post = this.postService.getPostById(id);
         if (post.isEmpty()) {
@@ -57,7 +58,7 @@ public class PostsController {
         return ResponseEntity.of(post);
     }
 
-    @GetMapping("/posts/{id}/previous")
+    @GetMapping("/api/posts/{id}/previous")
     public ResponseEntity<?> getPreviousPost(@PathVariable Long id){
         Optional<PostResponse> post = this.postService.findPrevious(id);
         return ResponseEntity.ok(
@@ -65,7 +66,7 @@ public class PostsController {
         );
     }
 
-    @GetMapping("/posts/{id}/next")
+    @GetMapping("/api/posts/{id}/next")
     public ResponseEntity<?> getNextPost(@PathVariable Long id){
         Optional<PostResponse> post = this.postService.findNext(id);
         return ResponseEntity.ok(

@@ -4,7 +4,7 @@
 @param List<PostModel> posts
 
 @template.base(
-title = "Home",
+title = "Dimitar On The Internet",
 head = @`<link rel="stylesheet" href="css/pages/index.css">`,
 content = @`
     <div class="main-content">

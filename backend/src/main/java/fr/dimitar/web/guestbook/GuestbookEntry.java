@@ -16,6 +16,7 @@ public class GuestbookEntry {
     private String content;
 
     @Column(name = "username")
+    @ColumnDefault(value = "null")
     private String username;
 
     @Column(name = "website")
@@ -25,20 +26,24 @@ public class GuestbookEntry {
     @ColumnDefault(value = "0")
     private boolean approved;
 
+    @Column(nullable = false, name="ip_address")
+    private String ipAddress;
+
     public GuestbookEntry() {}
 
-    public GuestbookEntry(String content) {
-        this(content, null, null);
+    public GuestbookEntry(String content, String ipAddress) {
+        this(content, null, null, ipAddress);
     }
 
-    public GuestbookEntry(String content, String username){
-        this(content, username, null);
+    public GuestbookEntry(String content, String username, String ipAddress){
+        this(content, username, null, ipAddress);
     }
 
-    public GuestbookEntry(String content, String username, String userWebsite) {
+    public GuestbookEntry(String content, String username, String userWebsite, String ipAddress) {
         this.content = content;
         this.username = username;
         this.userWebsite = userWebsite;
+        this.ipAddress = ipAddress;
     }
 
     public Long getId() {
@@ -59,6 +64,10 @@ public class GuestbookEntry {
 
     public boolean isApproved() {
         return approved;
+    }
+
+    public String getIpAddress() {
+        return ipAddress;
     }
 
 }

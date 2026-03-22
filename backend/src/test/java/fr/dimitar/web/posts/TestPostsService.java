@@ -4,6 +4,7 @@ import fr.dimitar.web.posts.dto.PostRequest;
 import fr.dimitar.web.posts.dto.PostResponse;
 import fr.dimitar.web.posts.filters.PostsFilter;
 import fr.dimitar.web.posts.mapper.PostMapper;
+import fr.dimitar.web.posts.services.PostService;
 import fr.dimitar.web.posts.specifications.PostSpecificationBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;

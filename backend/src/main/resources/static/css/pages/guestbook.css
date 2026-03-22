@@ -1,0 +1,114 @@
+.guestbook {
+  margin-block: 10px;
+  padding-inline: 5px;
+}
+
+.about {
+  border-bottom: 1px solid #505050;
+}
+.about p {
+  font-size: 0.9rem;
+  text-indent: 15px;
+}
+
+.two-columns {
+  display: grid;
+  padding-block: 10px;
+}
+@media (min-width: 1000px) {
+  .two-columns {
+    grid-template-columns: 4fr 6fr;
+  }
+}
+
+.guestbook-form {
+  margin: 5px;
+  border-bottom: 1px solid #505050;
+}
+
+label {
+  font-style: italic;
+}
+label.alias {
+  display: none;
+}
+
+textarea {
+  width: -webkit-fill-available;
+  height: 250px;
+  padding: 10px;
+  resize: vertical;
+  border: 1px solid #505050;
+  border-radius: 5px;
+  font-size: inherit;
+  font-family: inherit;
+  margin-block: 10px;
+}
+
+textarea:focus {
+  box-shadow: 3px 1px 1px #505050, -3px 1px 1px #505050;
+  outline: none;
+}
+
+input[type=submit] {
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding-block: 25px;
+}
+input[type=submit]:hover {
+  cursor: pointer;
+}
+
+.button-wrap {
+  text-align: center;
+}
+
+input[type=text], input[type=url] {
+  padding-inline: 10px;
+  width: -webkit-fill-available;
+  height: 1.3rem;
+  border: 1px solid #505050;
+  border-radius: 5px;
+  font-size: 0.7rem;
+  font-family: inherit;
+  margin-block: 10px;
+}
+input[type=text]:focus, input[type=url]:focus {
+  box-shadow: 3px 1px 1px #505050, -3px 1px 1px #505050;
+  outline: none;
+}
+
+.entry-list {
+  word-break: break-all;
+  text-wrap: balance;
+}
+
+.entry {
+  margin-bottom: 10px;
+}
+.entry p {
+  margin-block: 0;
+  padding: 5px;
+  text-indent: 0.5rem;
+}
+
+.entry-content {
+  font-size: 1.1rem;
+  font-style: italic;
+  text-align: left;
+}
+
+.entry-details {
+  font-size: 0.8rem;
+  text-align: right;
+  border-top: 1px solid black;
+  padding-top: 3px;
+  padding-right: 5px;
+  inline-size: fit-content;
+  margin-left: auto;
+}
+
+/*# sourceMappingURL=guestbook.css.map */

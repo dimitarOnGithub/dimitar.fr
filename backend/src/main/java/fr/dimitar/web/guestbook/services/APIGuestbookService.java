@@ -1,5 +1,7 @@
-package fr.dimitar.web.guestbook;
+package fr.dimitar.web.guestbook.services;
 
+import fr.dimitar.web.guestbook.GuestbookEntry;
+import fr.dimitar.web.guestbook.GuestbookRepository;
 import fr.dimitar.web.guestbook.dto.GuestbookRequest;
 import fr.dimitar.web.guestbook.dto.GuestbookResponse;
 import fr.dimitar.web.guestbook.filters.GuestbookFilter;

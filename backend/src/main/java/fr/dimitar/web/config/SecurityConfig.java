@@ -98,6 +98,18 @@ public class SecurityConfig {
 
     @Bean
     @Order(4)
+    public SecurityFilterChain guestbookChain(HttpSecurity httpSecurity) {
+        httpSecurity
+                .securityMatcher("/guestbook/**")
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.GET, "/guestbook").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/guestbook").permitAll()
+                );
+        return httpSecurity.build();
+    }
+
+    @Bean
+    @Order(5)
     public SecurityFilterChain homeChain(HttpSecurity httpSecurity) {
         httpSecurity
                 .securityMatcher("/**")
