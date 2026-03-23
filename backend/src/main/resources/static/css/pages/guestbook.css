@@ -81,6 +81,11 @@ input[type=text]:focus, input[type=url]:focus {
   outline: none;
 }
 
+.message {
+  font-style: italic;
+  border-bottom: 1px solid #505050;
+}
+
 .entry-list {
   word-break: break-all;
   text-wrap: balance;

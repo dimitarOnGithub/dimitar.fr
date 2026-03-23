@@ -2,9 +2,10 @@
 @import org.springframework.security.web.csrf.CsrfToken
 @import java.util.List
 
-@param fr.dimitar.web.guestbook.forms.GuestbookForm guestbookForm = null
+@param fr.dimitar.web.guestbook.forms.GuestbookForm guestbookForm
 @param CsrfToken csrfToken
 @param List<GuestbookForm> listOfEntries
+@param boolean formSaved = false
 
 @template.base(
 title = "Dimitar's Guestbook",
@@ -23,9 +24,17 @@ content = @`
             </p>
             <p>
                 It was either that or I'm truly having an old man yells at the clouds moment. Either way, you can leave a message, if you'd like, but please note that
-                there's a one message per person (or a very good bot) limit. :)
+                there's a one message per person limit. :)
             </p>
         </div>
+        @if(formSaved)
+            <div class="message">
+                <p>
+                    Thank you for dropping a message! I'm going to have to approve it before it becomes publicly visible as I can't be sure what people might try to put in
+                    the submission form.
+                </p>
+            </div>
+        @endif
         @if(guestbookForm != null)
             <div class="guestbook-form">
                 <form action="/guestbook" method="post">
@@ -54,7 +63,7 @@ content = @`
             @if(listOfEntries.isEmpty())
                 No one has posted anything :-(
             @else
-                @for(fr.dimitar.web.guestbook.forms.GuestbookForm entry: listOfEntries)
+                @for(GuestbookForm entry: listOfEntries)
                     <div class="entry">
                         <div class="entry-content content">
                             <p>${entry.getContent()}</p>

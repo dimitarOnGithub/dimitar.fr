@@ -47,6 +47,8 @@ public class PagesController {
         var entry = this.guestbookService.findByIpAddress(remoteIpAddress);
         if (entry.isEmpty()) {
             model.addAttribute("guestbookForm", new GuestbookForm());
+        } else {
+            model.addAttribute("formSaved", true);
         }
         model.addAttribute("csrfToken", token);
 
@@ -68,6 +70,6 @@ public class PagesController {
         model.addAttribute("guestbookForm", null);
         List<GuestbookForm> listOfEntries = this.guestbookService.getGuestbook();
         model.addAttribute("listOfEntries", listOfEntries);
-        return "guestbook";
+        return "redirect:/guestbook";
     }
 }
