@@ -1,4 +1,4 @@
-package fr.dimitar.web.guestbook;
+package fr.dimitar.web.guestbook.controllers;
 
 import fr.dimitar.web.guestbook.dto.GuestbookRequest;
 import fr.dimitar.web.guestbook.dto.GuestbookResponse;
@@ -10,12 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class GuestbookController {
+public class APIGuestbookController {
 
     private final APIGuestbookService guestbookService;
 
     @Autowired
-    public GuestbookController(APIGuestbookService guestbookService) {
+    public APIGuestbookController(APIGuestbookService guestbookService) {
         this.guestbookService = guestbookService;
     }
 

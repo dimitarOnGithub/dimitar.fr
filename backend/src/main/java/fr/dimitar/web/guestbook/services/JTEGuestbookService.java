@@ -2,6 +2,7 @@ package fr.dimitar.web.guestbook.services;
 
 import fr.dimitar.web.guestbook.GuestbookEntry;
 import fr.dimitar.web.guestbook.GuestbookRepository;
+import fr.dimitar.web.guestbook.dto.GuestbookModel;
 import fr.dimitar.web.guestbook.forms.GuestbookForm;
 import fr.dimitar.web.guestbook.mapper.GuestbookMapper;
 import fr.dimitar.web.guestbook.specifications.GuestbookSpecification;
@@ -14,16 +15,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class JteGuestbookService {
+public class JTEGuestbookService {
 
     private final GuestbookRepository guestbookRepository;
 
     @Autowired
-    public JteGuestbookService(GuestbookRepository guestbookRepository){
+    public JTEGuestbookService(GuestbookRepository guestbookRepository){
         this.guestbookRepository = guestbookRepository;
     }
 
-    public List<GuestbookForm> getGuestbook() {
+    public List<GuestbookModel> getGuestbook() {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
         Specification<GuestbookEntry> spec = GuestbookSpecification.approvedOnly(true);
         return this.guestbookRepository.findAll(spec, sort)
@@ -37,7 +38,7 @@ public class JteGuestbookService {
         this.guestbookRepository.save(entry);
     }
 
-    public Optional<GuestbookForm> findByIpAddress(String ipAddress) {
+    public Optional<GuestbookModel> findByIpAddress(String ipAddress) {
         Optional<GuestbookEntry> entry = this.guestbookRepository.findByIpAddress(ipAddress);
         return entry.map(GuestbookMapper::fromEntityToModel);
     }

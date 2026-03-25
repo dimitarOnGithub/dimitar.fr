@@ -1,6 +1,7 @@
 package fr.dimitar.web.guestbook.mapper;
 
 import fr.dimitar.web.guestbook.GuestbookEntry;
+import fr.dimitar.web.guestbook.dto.GuestbookModel;
 import fr.dimitar.web.guestbook.forms.GuestbookForm;
 import fr.dimitar.web.guestbook.dto.GuestbookRequest;
 import fr.dimitar.web.guestbook.dto.GuestbookResponse;
@@ -24,12 +25,13 @@ public interface GuestbookMapper {
         );
     }
 
-    static GuestbookForm fromEntityToModel(GuestbookEntry entry) {
-        var model = new GuestbookForm();
+    static GuestbookModel fromEntityToModel(GuestbookEntry entry) {
+        var model = new GuestbookModel();
         model.setContent(entry.getContent());
         model.setUsername(entry.getUsername());
         model.setUserWebsite(entry.getUserWebsite());
         model.setIpAddress(entry.getIpAddress());
+        model.setApproved(entry.isApproved());
         return model;
     }
 

@@ -7,6 +7,7 @@ public class GuestbookModel {
     private String userWebsite;
     private String alias;
     private String ipAddress;
+    private boolean isApproved;
 
     public GuestbookModel() {
         this.content = null;
@@ -66,6 +67,14 @@ public class GuestbookModel {
 
     public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
+    }
+
+    public boolean isApproved() {
+        return isApproved;
+    }
+
+    public void setApproved(boolean approved) {
+        isApproved = approved;
     }
 
 }

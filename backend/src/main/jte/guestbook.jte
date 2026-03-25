@@ -1,10 +1,10 @@
-@import fr.dimitar.web.guestbook.forms.GuestbookForm
+@import fr.dimitar.web.guestbook.dto.GuestbookModel
 @import org.springframework.security.web.csrf.CsrfToken
 @import java.util.List
 
 @param fr.dimitar.web.guestbook.forms.GuestbookForm guestbookForm
 @param CsrfToken csrfToken
-@param List<GuestbookForm> listOfEntries
+@param List<GuestbookModel> listOfEntries
 @param boolean formSaved = false
 
 @template.base(
@@ -63,7 +63,7 @@ content = @`
             @if(listOfEntries.isEmpty())
                 No one has posted anything :-(
             @else
-                @for(GuestbookForm entry: listOfEntries)
+                @for(GuestbookModel entry: listOfEntries)
                     <div class="entry">
                         <div class="entry-content content">
                             <p>${entry.getContent()}</p>
