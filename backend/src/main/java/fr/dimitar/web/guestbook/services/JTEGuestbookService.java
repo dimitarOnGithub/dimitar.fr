@@ -34,7 +34,7 @@ public class JTEGuestbookService {
     }
 
     public void postGuestbook(GuestbookForm guestbookRequest) {
-        GuestbookEntry entry = GuestbookMapper.fromModelToEntry(guestbookRequest);
+        GuestbookEntry entry = GuestbookMapper.fromFormToEntity(guestbookRequest);
         this.guestbookRepository.save(entry);
     }
 

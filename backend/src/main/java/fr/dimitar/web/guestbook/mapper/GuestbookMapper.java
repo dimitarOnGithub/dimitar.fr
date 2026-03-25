@@ -35,7 +35,7 @@ public interface GuestbookMapper {
         return model;
     }
 
-    static GuestbookEntry fromModelToEntry(GuestbookForm model) {
+    static GuestbookEntry fromFormToEntity(GuestbookForm model) {
         return new GuestbookEntry(
                 model.getContent(),
                 model.getUsername(),
