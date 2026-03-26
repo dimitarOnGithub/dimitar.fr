@@ -2,15 +2,18 @@ package fr.dimitar.web.pages;
 
 import fr.dimitar.web.posts.dto.PostModel;
 import fr.dimitar.web.posts.services.JTEPostService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.webmvc.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
 @Controller
-public class PagesController {
+public class PagesController implements ErrorController {
 
     private final JTEPostService postService;
 
@@ -29,6 +32,20 @@ public class PagesController {
     @GetMapping("/about")
     public String aboutPage() {
         return "about";
+    }
+
+    @RequestMapping("/error")
+    public String errorPage(HttpServletRequest request) {
+        Integer statusCode = (Integer) request.getAttribute("jakarta.servlet.error.status_code");
+        Throwable exception = (Throwable) request.getAttribute("jakarta.servlet.error.exception");
+
+        System.out.println("STATUS: " + statusCode);
+        return switch (statusCode) {
+            case 404 -> "errors/404";
+            case 403 -> "errors/403";
+            case 500 -> "errors/500";
+            default -> "foobar";
+        };
     }
 
 }

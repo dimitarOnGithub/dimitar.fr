@@ -2,18 +2,21 @@
 
 @template.base(
 title = "Not Found?",
-head = @`<link rel="stylesheet" type="text/css" href="css/pages/404.css">`,
+head = @`<link rel="stylesheet" type="text/css" href="css/pages/error-page.css">`,
 content = @`
     <div class="error-page">
         <h2>
             404 - Not Found
         </h2>
         <div class="error-page-content">
-            <img src="images/404.png" alt="A photo of a cat looking confused">
+            <img src="images/404.png" alt="Confused looking cat">
             <div>
                 <p>
                     Something here isn't quite right, it seems. You are seeing this error page because you tried to visit a page
                     that no longer exists.
+                </p>
+                <p>
+                    or is supposed to exist
                 </p>
                 <p>
                     or never existed
