@@ -18,6 +18,10 @@
   border-left: 0;
   border-right: 0;
   border-bottom: 1px solid #4b4b4e;
+
+  p {
+     margin: 7px;
+   }
 }
 
 .right-column {
@@ -32,10 +36,6 @@
     border-left: 1px solid #4b4b4e;
     border-bottom: 0;
   }
-}
-
-p {
-  margin: 7px;
 }
 
 .recent-updates {
