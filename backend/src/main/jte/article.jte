@@ -6,7 +6,7 @@
 @param Optional<PostModel> next
 
 @template.base(
-    title = "${article.getTitle()}",
+    title = article.getTitle(),
     head = @`<link rel="stylesheet" href="css/pages/article.css">`,
     content =  @`
     <div class="article">

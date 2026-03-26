@@ -1,0 +1,90 @@
+h2 {
+  margin-bottom: 0;
+}
+
+.contact {
+  text-align: center;
+}
+
+.contact-form {
+  padding: 30px;
+}
+
+.message-label {
+  display: block;
+  text-align: left;
+}
+
+.email-label {
+  display: block;
+  text-align: left;
+}
+
+textarea {
+  width: -webkit-fill-available;
+  height: 250px;
+  padding: 10px;
+  resize: vertical;
+  border: 1px solid #505050;
+  border-radius: 5px;
+  font-size: inherit;
+  font-family: inherit;
+  margin-block: 10px;
+}
+
+textarea:focus {
+  box-shadow: 3px 1px 1px #505050, -3px 1px 1px #505050;
+  outline: none;
+}
+
+.name-label {
+  display: none;
+}
+
+.name {
+  display: inherit;
+}
+.name input[type=text] {
+  padding-inline: 10px;
+  width: -webkit-fill-available;
+  height: 1.3rem;
+  border: 1px solid #505050;
+  border-radius: 5px;
+  font-size: 0.7rem;
+}
+
+input[type=email] {
+  padding-inline: 10px;
+  width: -webkit-fill-available;
+  height: 1.3rem;
+  border: 1px solid #505050;
+  border-radius: 5px;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+input[type=email]:focus {
+  box-shadow: 3px 1px 1px #505050, -3px 1px 1px #505050;
+  outline: none;
+}
+
+input[type=submit] {
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding-block: 25px;
+}
+
+input[type=submit]:hover {
+  cursor: pointer;
+}
+
+.error {
+  font-style: italic;
+  font-size: 0.7rem;
+  margin-bottom: 10px;
+}
+
+/*# sourceMappingURL=contact.css.map */
