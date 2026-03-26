@@ -83,6 +83,7 @@ content = @`
                         <div class="links-holder">
                             <a href="https://github.com/dimitarOnGithub" target="_blank"><img class="icon" src="/icons/github.png" alt="Github Link"></a>
                             <a href="https://www.linkedin.com/in/dimitarxivanov/" target="_blank"><img class="icon" src="/icons/linkedin.png" alt="LinkedIn Link"></a>
+                            <a href="https://www.goodreads.com/user/show/136298234-dimitar" target="_blank"><img class="icon" src="/icons/goodreads.png" alt="Goodreads"></a>
                         </div>
                     </div>
                 </div>

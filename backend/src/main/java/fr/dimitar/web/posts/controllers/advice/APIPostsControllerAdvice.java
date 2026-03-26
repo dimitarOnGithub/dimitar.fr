@@ -1,4 +1,4 @@
-package fr.dimitar.web.posts;
+package fr.dimitar.web.posts.controllers.advice;
 
 
 import fr.dimitar.web.posts.exceptions.PostNotFoundException;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class PostsControllerAdvice {
+public class APIPostsControllerAdvice {
 
     @ExceptionHandler(PostNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)

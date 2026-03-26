@@ -20,9 +20,9 @@ body {
   );
   border-radius: 0.4em 0 0.7em 0;
   color: #292626;
-  padding-right: 3px;
+  padding-right: 5px;
   text-decoration: none;
-  text-wrap: nowrap;
+  text-wrap: balance;
   font-style: italic;
   transition: background-color 0.4s ease;
 }
@@ -44,3 +44,6 @@ body {
   background-color: rgb(255, 105, 180, 0.4);
 }
 
+p {
+    text-indent: 15px;
+}

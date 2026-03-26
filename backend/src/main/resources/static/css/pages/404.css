@@ -1,0 +1,37 @@
+.error-page {
+  padding-inline: 5px;
+}
+
+h2 {
+  margin-bottom: 5px;
+}
+
+.error-page-content {
+  display: grid;
+}
+@media (min-width: 1000px) {
+  .error-page-content {
+    grid-template-columns: 1fr 3fr;
+    grid-column-gap: 25px;
+  }
+}
+
+img {
+  display: block;
+  width: auto;
+  height: 99%;
+}
+
+p {
+  margin-block: 10px;
+  padding-inline: 10px;
+  text-wrap: balance;
+  text-indent: 0;
+}
+@media (min-width: 1000px) {
+  p {
+    text-align: left;
+  }
+}
+
+/*# sourceMappingURL=404.css.map */
