@@ -10,7 +10,7 @@ h2 {
   display: grid;
 
   @media (min-width: 1000px) {
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: auto 3fr;
     grid-column-gap: 25px;
   }
 
@@ -18,8 +18,12 @@ h2 {
 
 img {
   display: block;
-  width: auto;
-  height: 99%;
+  height: auto;
+  max-width: 100%;
+
+  @media (min-width: 1000px) {
+      width: 100%;
+    }
 }
 
 p {
