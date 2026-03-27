@@ -39,12 +39,11 @@ public class PagesController implements ErrorController {
         Integer statusCode = (Integer) request.getAttribute("jakarta.servlet.error.status_code");
         Throwable exception = (Throwable) request.getAttribute("jakarta.servlet.error.exception");
 
-        System.out.println("STATUS: " + statusCode);
         return switch (statusCode) {
-            case 404 -> "errors/404";
+            case 400 -> "errors/400";
             case 403 -> "errors/403";
-            case 500 -> "errors/500";
-            default -> "foobar";
+            case 404 -> "errors/404";
+            default -> "errors/500";
         };
     }
 

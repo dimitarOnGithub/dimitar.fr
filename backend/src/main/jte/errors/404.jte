@@ -16,10 +16,10 @@ content = @`
                     that no longer exists.
                 </p>
                 <p>
-                    or is supposed to exist
+                    or one that is supposed to exist
                 </p>
                 <p>
-                    or never existed
+                    or one that never existed
                 </p>
                 <p>
                     or never will exist

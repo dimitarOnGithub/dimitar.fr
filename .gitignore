@@ -3,7 +3,7 @@ HELP.md
 target/
 backend/.mvn/wrapper/maven-wrapper.jar
 backend/jte-classes/**
-css/**
+**/css/**
 !**/src/main/**/target/
 !**/src/test/**/target/
 
