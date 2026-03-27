@@ -19,10 +19,13 @@
 <body>
 <header>
     <nav>
-        <a href="/">Index</a>
-        <a href="/archive">Archive</a>
-        <a href="/now">Now</a>
-        <a href="/about">About</a>
+        <a href="/">home</a>
+        <span>-</span>
+        <a href="/archive">archive</a>
+        <span>-</span>
+        <a href="/now">now</a>
+        <span>-</span>
+        <a href="/about">about</a>
     </nav>
 </header>
 ${content}
