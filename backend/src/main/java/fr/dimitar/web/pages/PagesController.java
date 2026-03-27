@@ -29,6 +29,11 @@ public class PagesController implements ErrorController {
         return "index";
     }
 
+    @GetMapping("/now")
+    public String nowPage() {
+        return "now";
+    }
+
     @GetMapping("/about")
     public String aboutPage() {
         return "about";
