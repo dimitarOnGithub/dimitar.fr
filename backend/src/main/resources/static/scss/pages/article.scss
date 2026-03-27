@@ -18,6 +18,13 @@
   display: inherit;
 }
 
+.article-content {
+
+    p {
+        text-indent: 15px;
+    }
+}
+
 h2 {
   grid-column: 1;
   font-style: italic;
