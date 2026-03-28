@@ -31,8 +31,12 @@ public class PostModel {
         return content;
     }
 
-    public String getPublishedDate() {
-        return publishedDate.format(DateTimeFormatter.ofPattern("dd MMM, yyyy"));
+    public ZonedDateTime getPublishedDateTime() {
+        return this.publishedDate;
+    }
+
+    public String formatPublishedDate(String pattern) {
+        return publishedDate.format(DateTimeFormatter.ofPattern(pattern));
     }
 
     public boolean isADraft() {

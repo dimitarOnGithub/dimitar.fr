@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class PagesController implements ErrorController {
@@ -27,6 +27,20 @@ public class PagesController implements ErrorController {
         List<PostModel> posts = this.postService.getRecentPosts(6);
         model.addAttribute("posts", posts);
         return "index";
+    }
+
+    @GetMapping("/archive")
+    public String archivePage(Model model) {
+        List<PostModel> posts = this.postService.getPosts();
+        SortedMap<Integer, List<PostModel>> postsMap = new TreeMap<>(java.util.Collections.reverseOrder());
+        for(PostModel postModel: posts) {
+            int postYear = postModel.getPublishedDateTime().getYear();
+            var yearlyList = postsMap.getOrDefault(postYear, new ArrayList<>());
+            yearlyList.add(postModel);
+            postsMap.put(postYear, yearlyList);
+        }
+        model.addAttribute("postsMap", postsMap);
+        return "archive";
     }
 
     @GetMapping("/now")

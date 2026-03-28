@@ -56,7 +56,7 @@ content = @`
                         <div class="item">
                             <a href="/posts/${article.getId()}">${article.getTitle()}</a>
                             <span class="breaker"></span>
-                            <span class="item-date">${article.getPublishedDate()}</span>
+                            <span class="item-date">${article.formatPublishedDate("dd MMM, yyyy")}</span>
                         </div>
                     @endfor
                 @endif

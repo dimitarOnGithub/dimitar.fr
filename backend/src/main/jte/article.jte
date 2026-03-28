@@ -16,7 +16,7 @@
                     ${article.getTitle()}
                 </h2>
                 <div class="published-date">
-                    ${article.getPublishedDate()}
+                    ${article.formatPublishedDate("dd MMM, yyyy")}
                 </div>
             </div>
         </div>
@@ -28,13 +28,13 @@
         @if (previous.isPresent())
             <a class="previous-article" href="/posts/${previous.get().getId()}">
                 <h3>${previous.get().getTitle()}</h3>
-                <div class="article-date">${previous.get().getPublishedDate()}</div>
+                <div class="article-date">${previous.get().formatPublishedDate("dd MMM, yyyy")}</div>
             </a>
         @endif
         @if (next.isPresent())
             <a class="next-article" href="/posts/${next.get().getId()}">
                 <h3>${next.get().getTitle()}</h3>
-                <div class="article-date">${next.get().getPublishedDate()}</div>
+                <div class="article-date">${next.get().formatPublishedDate("dd MMM, yyyy")}</div>
             </a>
         @endif
     </div>
