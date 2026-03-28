@@ -6,6 +6,7 @@ import fr.dimitar.web.posts.dto.PostModel;
 import fr.dimitar.web.posts.dto.PostResponse;
 import fr.dimitar.web.posts.filters.PostsFilter;
 import fr.dimitar.web.posts.mapper.PostMapper;
+import fr.dimitar.web.posts.specifications.PostSpecification;
 import fr.dimitar.web.posts.specifications.PostSpecificationBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
@@ -16,12 +17,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class JtePostService {
+public class JTEPostService {
 
     private final PostsRepository postsRepository;
 
     @Autowired
-    public JtePostService(PostsRepository postsRepository) {
+    public JTEPostService(PostsRepository postsRepository) {
         this.postsRepository = postsRepository;
     }
 
@@ -39,14 +40,24 @@ public class JtePostService {
                 .toList();
     }
 
-    public Page<PostResponse> getPosts(PostsFilter postsFilter) {
-        return null;
+    public List<PostModel> getPosts() {
+        Sort sort = Sort.by(Sort.Direction.DESC, "publishedDate");
+        PostsFilter filter = new PostsFilter();
+        filter.setDraftsOnly(false);
+        Specification<Post> spec = PostSpecificationBuilder.fromFilter(filter);
+        var a = this.postsRepository.findAll(spec, sort);
+        return a.stream()
+                .map(PostMapper::fromEntityToModel)
+                .toList();
     }
 
     public Optional<PostModel> getPostById(Long postId) {
-        return Optional.of(
-                PostMapper.fromEntityToModel(this.postsRepository.getReferenceById(postId))
-        );
+        var spec = PostSpecification
+                .specificId(postId)
+                .and(PostSpecification.draftsOnly(false));
+        return this.postsRepository.findOne(spec)
+                .map(PostMapper::fromEntityToModel);
+
     }
 
     public Optional<PostModel> findPrevious(Long postId) {

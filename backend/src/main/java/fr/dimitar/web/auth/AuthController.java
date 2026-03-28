@@ -28,7 +28,7 @@ public class AuthController {
         this.authenticationManager = authenticationManager;
     }
 
-    @PostMapping("/auth")
+    @PostMapping("/api/auth")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest, HttpServletRequest request) {
 
         // Authenticate
@@ -52,7 +52,7 @@ public class AuthController {
         }
     }
 
-    @GetMapping("/myself")
+    @GetMapping("/api/myself")
     public ResponseEntity<?> getCurrentUser(@AuthenticationPrincipal UserDetails userDetails) {
         return ResponseEntity.status(200).body(Map.of("username", userDetails.getUsername()));
     }

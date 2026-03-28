@@ -14,4 +14,11 @@ public class PostSpecification {
         );
     }
 
+    public static Specification<Post> specificId(Long id){
+        return (
+                (root, query, criteriaBuilder)
+                    -> root.get("id").equalTo(id)
+                );
+    }
+
 }

@@ -19,27 +19,24 @@ import java.util.Optional;
 @Service
 @Transactional
 @Profile("!test")
-public class PostServiceImpl implements PostService {
+public class APIPostService {
 
     private final PostsRepository postsRepository;
 
     @Autowired
-    public PostServiceImpl(PostsRepository postsRepository){
+    public APIPostService(PostsRepository postsRepository){
         this.postsRepository = postsRepository;
     }
 
-    @Override
     public PostResponse publishPost(PostRequest post) {
         Post createdPost = this.postsRepository.saveAndFlush(PostMapper.fromRequestToEntity(post));
         return PostMapper.fromEntityToResponse(createdPost);
     }
 
-    @Override
     public void deletePost(Long postId) {
         this.postsRepository.deleteById(postId);
     }
 
-    @Override
     public Page<PostResponse> getPosts(PostsFilter postsFilter) {
         Sort sort = Sort.by(Sort.Direction.DESC, "publishedDate");
         Pageable pageable = PageRequest.of(postsFilter.getPage(), postsFilter.getPageSize(), sort);
@@ -50,7 +47,6 @@ public class PostServiceImpl implements PostService {
         return this.postsRepository.findAll(specification, pageable).map(PostMapper::fromEntityToResponse);
     }
 
-    @Override
     public Page<PostResponse> getDrafts(PostsFilter postsFilter) {
         Sort sort = Sort.by(Sort.Direction.DESC, "publishedDate");
         Pageable pageable = PageRequest.of(postsFilter.getPage(), postsFilter.getPageSize(), sort);
@@ -61,19 +57,16 @@ public class PostServiceImpl implements PostService {
         return this.postsRepository.findAll(specification, pageable).map(PostMapper::fromEntityToResponse);
     }
 
-    @Override
     public Optional<PostResponse> getPostById(Long postId) {
         Optional<Post> post = this.postsRepository.findById(postId);
         return post.map(PostMapper::fromEntityToResponse);
     }
 
-    @Override
     public Optional<PostResponse> findPrevious(Long postId) {
         Optional<Post> post = this.postsRepository.findPrevious(postId, Limit.of(1));
         return post.map(PostMapper::fromEntityToResponse);
     }
 
-    @Override
     public Optional<PostResponse> findNext(Long postId) {
         Optional<Post> post = this.postsRepository.findNext(postId, Limit.of(1));
         return post.map(PostMapper::fromEntityToResponse);

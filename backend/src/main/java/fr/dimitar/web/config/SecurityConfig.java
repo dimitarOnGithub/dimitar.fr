@@ -52,29 +52,14 @@ public class SecurityConfig {
 
     @Bean
     @Order(1)
-    public SecurityFilterChain postsChain(HttpSecurity httpSecurity) {
-        httpSecurity
-                .securityMatcher("/posts/**")
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/posts").authenticated()
-                        .requestMatchers(HttpMethod.PUT, "/posts/**").authenticated()
-                        .requestMatchers(HttpMethod.DELETE, "/posts/**").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/posts/**").permitAll()
-                        .requestMatchers(HttpMethod.OPTIONS, "/posts/**").permitAll()
-                );
-        return httpSecurity.build();
-    }
-
-    @Bean
-    @Order(2)
     public SecurityFilterChain authChain(HttpSecurity httpSecurity){
         httpSecurity
-                .securityMatcher("/auth", "/myself")
+                .securityMatcher("/api/auth", "/api/myself")
                 .csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/auth").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/myself").authenticated()
+                        .requestMatchers(HttpMethod.OPTIONS, "/api/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/auth").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/myself").authenticated()
                 )
                 // Use session-based authentication
                 .sessionManagement(
@@ -86,36 +71,25 @@ public class SecurityConfig {
     }
 
     @Bean
+    @Order(2)
+    public SecurityFilterChain apiChain(HttpSecurity httpSecurity) {
+        httpSecurity
+                .securityMatcher("/api/**")
+                .authorizeHttpRequests(auth -> auth
+                        .anyRequest().authenticated()
+                );
+        return httpSecurity.build();
+    }
+
+    @Bean
     @Order(3)
-    public SecurityFilterChain draftsChain(HttpSecurity httpSecurity) {
-        httpSecurity
-                .securityMatcher("/drafts/**")
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/drafts").authenticated()
-                );
-        return httpSecurity.build();
-    }
-
-    @Bean
-    @Order(4)
-    public SecurityFilterChain guestbookChain(HttpSecurity httpSecurity) {
-        httpSecurity
-                .securityMatcher("/guestbook/**")
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.GET, "/guestbook").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/guestbook").permitAll()
-                );
-        return httpSecurity.build();
-    }
-
-    @Bean
-    @Order(5)
-    public SecurityFilterChain homeChain(HttpSecurity httpSecurity) {
+    public SecurityFilterChain postsChain(HttpSecurity httpSecurity) {
         httpSecurity
                 .securityMatcher("/**")
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.GET, "/**").permitAll()
+                        .anyRequest().permitAll()
                 );
         return httpSecurity.build();
     }
+
 }

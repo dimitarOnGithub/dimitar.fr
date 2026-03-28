@@ -1,10 +1,10 @@
 package fr.dimitar.web.posts.controllers;
 
-import fr.dimitar.web.posts.services.PostService;
 import fr.dimitar.web.posts.dto.PostRequest;
 import fr.dimitar.web.posts.dto.PostResponse;
 import fr.dimitar.web.posts.exceptions.PostNotFoundException;
 import fr.dimitar.web.posts.filters.PostsFilter;
+import fr.dimitar.web.posts.services.APIPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.web.PagedModel;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +15,12 @@ import java.net.URI;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200/")
 public class APIPostsController {
 
-    private final PostService postService;
+    private final APIPostService postService;
 
     @Autowired
-    public APIPostsController(PostService postService){
+    public APIPostsController(APIPostService postService){
         this.postService = postService;
     }
 
