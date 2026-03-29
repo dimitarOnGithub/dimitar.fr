@@ -1,7 +1,7 @@
 
 @template.base(
 title = "Dimitar's Now",
-head = @`<link rel="stylesheet" href="css/pages/now.css">`,
+head = @`<link rel="stylesheet" href="/static/css/pages/now.css">`,
 content = @`
     <div class="now-body">
         <p class="description">

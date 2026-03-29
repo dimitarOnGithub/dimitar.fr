@@ -7,7 +7,7 @@
 
 @template.base(
 title = "Blog Archive",
-head = @`<link rel="stylesheet" href="css/pages/archive.css">`,
+head = @`<link rel="stylesheet" href="/static/css/pages/archive.css">`,
 content = @`
     <div class="archive-container">
         @if(postsMap.isEmpty())

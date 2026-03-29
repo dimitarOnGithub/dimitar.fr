@@ -1,13 +1,13 @@
 @template.base(
 title = "This is illegal",
-head = @`<link rel="stylesheet" type="text/css" href="css/pages/error-page.css">`,
+head = @`<link rel="stylesheet" type="text/css" href="/static/css/pages/error-page.css">`,
 content = @`
     <div class="error-page">
         <h2>
             403 - Forbidden
         </h2>
         <div class="error-page-content">
-            <img src="images/403.png" alt="A cat looking at your suspiciously">
+            <img src="/static/images/403.png" alt="A cat looking at your suspiciously">
             <div>
                 <p>
                     Mind explaining what are you trying to do?

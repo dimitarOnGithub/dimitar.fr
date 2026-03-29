@@ -1,6 +1,6 @@
 @template.base(
 title = "About Dimitar",
-head = @`<link rel="stylesheet" type="text/css" href="css/pages/about.css">`,
+head = @`<link rel="stylesheet" type="text/css" href="/static/css/pages/about.css">`,
 content = @`
     <div class="main-content">
         <h2>too long; didn't read</h2>

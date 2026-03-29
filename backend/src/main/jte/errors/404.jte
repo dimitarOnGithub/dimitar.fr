@@ -2,14 +2,14 @@
 
 @template.base(
 title = "Not Found?",
-head = @`<link rel="stylesheet" type="text/css" href="css/pages/error-page.css">`,
+head = @`<link rel="stylesheet" type="text/css" href="/static/css/pages/error-page.css">`,
 content = @`
     <div class="error-page">
         <h2>
             404 - Not Found
         </h2>
         <div class="error-page-content">
-            <img src="images/404.png" alt="Confused looking cat">
+            <img src="/static/images/404.png" alt="Confused looking cat">
             <div>
                 <p>
                     Something here isn't quite right, it seems. You are seeing this error page because you tried to visit a page

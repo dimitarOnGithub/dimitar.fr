@@ -7,7 +7,7 @@
 
 @template.base(
 title = "Contact Dimitar",
-head = @`<link rel="stylesheet" type="text/css" href="css/pages/contact.css">`,
+head = @`<link rel="stylesheet" type="text/css" href="/static/css/pages/contact.css">`,
 content = @`
     <div class="contact">
         <h2>Get In Touch</h2>

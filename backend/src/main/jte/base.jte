@@ -10,10 +10,10 @@
     <title>${title}</title>
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/partials/header.css">
-    <link rel="stylesheet" href="css/partials/footer.css">
-    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/partials/header.css">
+    <link rel="stylesheet" href="/static/css/partials/footer.css">
+    <link rel="stylesheet" href="/static/css/fonts.css">
     ${head}
 </head>
 <body>

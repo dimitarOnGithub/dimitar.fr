@@ -1,13 +1,13 @@
 @template.base(
 title = "The Website is Dead",
-head = @`<link rel="stylesheet" type="text/css" href="css/pages/error-page.css">`,
+head = @`<link rel="stylesheet" type="text/css" href="/static/css/pages/error-page.css">`,
 content = @`
     <div class="error-page">
         <h2>
             500 - Internal Server Error
         </h2>
         <div class="error-page-content">
-            <img src="images/500.jpg" alt="Silly looking cat">
+            <img src="/static/images/500.jpg" alt="Silly looking cat">
             <div>
                 <p>
                     Guess who thought it'd be a good idea to pick an enterprise-level framework to develop something

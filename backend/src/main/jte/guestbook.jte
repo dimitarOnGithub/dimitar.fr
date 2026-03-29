@@ -9,7 +9,7 @@
 
 @template.base(
 title = "Dimitar's Guestbook",
-head = @`<link rel="stylesheet" href="css/pages/guestbook.css">`,
+head = @`<link rel="stylesheet" href="/static/css/pages/guestbook.css">`,
 content = @`
     <div class="guestbook">
         <div class="about">

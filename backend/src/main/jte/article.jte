@@ -7,7 +7,7 @@
 
 @template.base(
     title = article.getTitle(),
-    head = @`<link rel="stylesheet" href="css/pages/article.css">`,
+    head = @`<link rel="stylesheet" href="/static/css/pages/article.css">`,
     content =  @`
     <div class="article">
         <div class="article-header">

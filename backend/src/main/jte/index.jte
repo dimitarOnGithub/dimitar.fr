@@ -5,7 +5,7 @@
 
 @template.base(
 title = "Dimitar On The Internet",
-head = @`<link rel="stylesheet" href="css/pages/index.css">`,
+head = @`<link rel="stylesheet" href="/static/css/pages/index.css">`,
 content = @`
     <div class="main-content">
         <div class="left-column">
@@ -65,7 +65,7 @@ content = @`
         <div class="right-column">
             <div class="side-panel">
                 <div class="photo">
-                    <img class="profile-pic" src="/images/profile_pic.jpg" alt="Dimitar smiling">
+                    <img class="profile-pic" src="/static/images/profile_pic.jpg" alt="Dimitar smiling">
                 </div>
                 <div class="side-panel-text">
                     <div class="description">
@@ -81,9 +81,9 @@ content = @`
                             Find me here:
                         </p>
                         <div class="links-holder">
-                            <a href="https://github.com/dimitarOnGithub" target="_blank"><img class="icon" src="/icons/github.png" alt="Github Link"></a>
-                            <a href="https://www.linkedin.com/in/dimitarxivanov/" target="_blank"><img class="icon" src="/icons/linkedin.png" alt="LinkedIn Link"></a>
-                            <a href="https://www.goodreads.com/user/show/136298234-dimitar" target="_blank"><img class="icon" src="/icons/goodreads.png" alt="Goodreads"></a>
+                            <a href="https://github.com/dimitarOnGithub" target="_blank"><img class="icon" src="/static/icons/github.png" alt="Github Link"></a>
+                            <a href="https://www.linkedin.com/in/dimitarxivanov/" target="_blank"><img class="icon" src="/static/icons/linkedin.png" alt="LinkedIn Link"></a>
+                            <a href="https://www.goodreads.com/user/show/136298234-dimitar" target="_blank"><img class="icon" src="/static/icons/goodreads.png" alt="Goodreads"></a>
                         </div>
                     </div>
                 </div>
