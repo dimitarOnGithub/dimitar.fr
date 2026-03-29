@@ -46,7 +46,7 @@ textarea:focus {
 .name {
   display: inherit;
 
-  input[type=text] {
+  & input[type=text] {
     padding-inline: 10px;
     width: -webkit-fill-available;
     height: 1.3rem;

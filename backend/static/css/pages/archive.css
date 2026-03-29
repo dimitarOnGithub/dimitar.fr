@@ -2,7 +2,7 @@
     display: grid;
     padding-inline: 10px;
 
-    a {
+    & a {
         font-style: italic;
         font-weight: bold;
         font-size: 1.3rem;
@@ -12,7 +12,7 @@
         justify-content: flex-end;
     }
 
-    button {
+    & button {
         border: none;
         background: none;
         justify-self: center;
@@ -37,14 +37,14 @@ h1 {
   padding-inline: 10px;
   align-items: first baseline;
 
-  .breaker {
+  & .breaker {
     flex-grow: 1;
     height: 0.9rem;
     border-bottom: 1px dotted black;
     margin-inline: 2px;
   }
 
-  .item-date {
+  & .item-date {
     flex-shrink: 0;
   }
 

@@ -19,7 +19,7 @@
   border-right: 0;
   border-bottom: 1px solid #4b4b4e;
 
-  p {
+  & p {
      margin: 7px;
    }
 }
@@ -41,7 +41,7 @@
 .recent-updates {
     display: grid;
 
-    a {
+    & a {
         font-style: italic;
         font-weight: bold;
         font-size: 1.3rem;
@@ -51,7 +51,7 @@
         justify-content: flex-end;
     }
 
-    button {
+    & button {
         border: none;
         background: none;
         justify-self: center;
@@ -70,14 +70,14 @@
   margin-block: 10px;
   align-items: first baseline;
 
-  .breaker {
+  & .breaker {
     flex-grow: 1;
     height: 0.9rem;
     border-bottom: 1px dotted black;
     margin-inline: 2px;
   }
 
-  .item-date {
+  & .item-date {
     flex-shrink: 0;
   }
 
@@ -100,7 +100,7 @@
 }
 
 .side-panel-text {
-  p {
+  & p {
     margin-block: 0;
     text-indent: 0;
   }
@@ -134,7 +134,7 @@
 .social-links {
   margin-top: 25px;
 
-  a {
+  & a {
     padding-inline: 2px;
   }
 }
