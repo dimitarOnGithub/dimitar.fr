@@ -15,11 +15,12 @@
       profiles: [ dev ]
       volumes:
         - ./nginx/nginx-local.conf:/etc/nginx/nginx.conf:ro
-        - ../backend/static:/usr/share/nginx/html:ro
+        - ../backend/static/:/static:ro
 
     webserver-prod:
       <<: *nginx-base
       profiles: [ prod ]
       volumes:
-        - ./nginx/nginx-local.conf:/etc/nginx/nginx.conf:ro
-        - ../backend/static:/usr/share/nginx/html:ro
+        - ./nginx/nginx-prod.conf:/etc/nginx/nginx.conf:ro
+        - ../backend/static/:/static:ro
+        - /etc/letsencrypt/:/certs:ro
