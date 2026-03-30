@@ -1,0 +1,25 @@
+###
+# Base nginx configuration
+###
+  x-nginx-base: &nginx-base
+    image: nginx:alpine
+    container_name: webserver
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+  services:
+    webserver-dev:
+      <<: *nginx-base
+      profiles: [ dev ]
+      volumes:
+        - ./nginx/nginx-local.conf:/etc/nginx/nginx.conf:ro
+        - ../backend/static:/usr/share/nginx/html:ro
+
+    webserver-prod:
+      <<: *nginx-base
+      profiles: [ prod ]
+      volumes:
+        - ./nginx/nginx-local.conf:/etc/nginx/nginx.conf:ro
+        - ../backend/static:/usr/share/nginx/html:ro
