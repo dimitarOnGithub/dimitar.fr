@@ -6,6 +6,8 @@ backend/jte-classes/**
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+ansible/inventory.yml
+
 ### STS ###
 .apt_generated
 .classpath
