@@ -49,7 +49,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./services/nginx/nginx-local.conf:/etc/nginx/nginx.conf:ro
+      - ./configs/nginx/nginx-local.conf:/etc/nginx/nginx.conf:ro
       - ./backend/static/:/static:ro
     depends_on:
       backend:
