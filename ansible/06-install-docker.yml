@@ -1,0 +1,85 @@
+---
+
+- name: Create Docker user & group
+  hosts: personal
+
+  vars:
+    ansible_become: true
+    ansible_become_method: sudo
+    ansible_become_user: root
+
+  tasks:
+    - name: Remove unofficial Docker packages
+      ansible.builtin.apt:
+        name:
+          - docker.io
+          - docker-compose
+          - docker-compose-v2
+          - docker-doc
+          - podman-docker
+        state: absent
+
+    - name: Remove Docker engine
+      ansible.builtin.apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+          - docker-ce-rootless-extras
+        state: absent
+
+    - name: Clean up leftover data
+      ansible.builtin.file:
+        path:
+          - /var/lib/docker
+          - /var/lib/containerd
+        state: absent
+
+    - name: Update repositories
+      ansible.builtin.apt:
+        update_cache: yes
+
+    - name: Download pre-required packages
+      ansible.builtin.apt:
+        name:
+          - ca-certificates
+          - curl
+
+    - name: Add Docker key & Repo
+      ansible.builtin.deb822_repository:
+        name: Docker repository
+        types: deb
+        uris: https://download.docker.com/linux/ubuntu
+        suites: '{{ ansible_distribution_release }}'
+        components: stable
+        architectures: amd64
+        signed_by: https://download.docker.com/linux/ubuntu/gpg
+
+    - name: Update repositories
+      ansible.builtin.apt:
+        update_cache: yes
+
+    - name: Install Docker
+      ansible.builtin.apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        state: present
+
+    - name: Start Docker
+      ansible.builtin.service:
+        name: docker
+        state: started
+
+    - name: Verify Docker Installation
+      ansible.builtin.command: docker run hello-world
+      register: docker_output
+
+    - name: Docker Hello World Output
+      ansible.builtin.debug:
+        msg: "Docker output: {{ docker_output }}"

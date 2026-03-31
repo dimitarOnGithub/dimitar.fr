@@ -1,0 +1,11 @@
+---
+all:
+  hosts:
+    personal:
+      ansible_connection: ssh
+      ansible_host: NULL
+
+  vars:
+    ansible_user: ubuntu
+    ansible_ssh_private_key_file: NULL
+    pubkey_path: NULL

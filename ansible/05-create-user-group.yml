@@ -1,0 +1,22 @@
+---
+
+- name: Create Docker user & group
+  hosts: personal
+
+  vars:
+    ansible_become: true
+    ansible_become_method: sudo
+    ansible_become_user: root
+
+  tasks:
+    - name: Create Docker group
+      ansible.builtin.group:
+        name: docker
+        state: present
+
+    - name: Create Docker user
+      ansible.builtin.user:
+        name: docker
+        create_home: yes
+        shell: /bin/bash
+        groups: docker

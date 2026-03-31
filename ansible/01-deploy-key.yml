@@ -1,0 +1,17 @@
+---
+
+- name: Deploy SSH key
+  hosts: personal
+
+  vars:
+    ansible_become: true
+    ansible_become_method: sudo
+    ansible_become_user: root
+
+  tasks:
+    - name: Deploy public key
+      ansible.posix.authorized_key:
+        user: ubuntu
+        state: present
+        key: "{{ lookup('file', pubkey_path) }}"
+      when: pubkey_path != ""

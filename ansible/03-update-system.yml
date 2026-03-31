@@ -1,0 +1,15 @@
+---
+
+- name: Update packages
+  hosts: personal
+
+  vars:
+    ansible_become: true
+    ansible_become_method: sudo
+    ansible_become_user: root
+
+  tasks:
+    - name: Update & upgrade packages
+      ansible.builtin.apt:
+        update_cache: yes
+        upgrade: yes
