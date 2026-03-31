@@ -73,7 +73,7 @@ content = @`
         <h2>About this Site</h2>
         <p>
             This site is hosted on
-            <a class="highlight" target="_blank" href="https://www.hetzner.com/">Hetzner</a>, it doesn't collect any data
+            <a class="highlight" target="_blank" href="https://www.ovhcloud.com/en/">OVHcloud</a>, it doesn't collect any data
             about you because I don't give a fuck about collecting data. It uses some cookies but nothing used to profile
             or analyze you. Your IP address might be saved if you interact with the Guestbook but that's just me trying to
             reduce the amount of potential spam I might have to deal with.
