@@ -7,7 +7,10 @@ services:
     volumes:
       - mariadb_data:/var/lib/mysql
     expose:
-      - "3306"
+      - "12306"
+    environment:
+      MYSQL_TCP_PORT: 12306
+      MYSQL_UNIX_PORT: 12306
 
   backend:
     expose:

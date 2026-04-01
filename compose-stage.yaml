@@ -5,7 +5,7 @@ services:
 
   database:
     volumes:
-      - mariadb_data:/var/lib/mysql/prod
+      - mariadb_data:/var/lib/mysql
     expose:
       - "12306"
     environment:
