@@ -1,0 +1,26 @@
+include:
+  - backend/compose-backend.yaml
+
+services:
+
+  database:
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    expose:
+      - "3306"
+
+  backend:
+    expose:
+      - "8080"
+
+  webserver:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx-local.conf:/etc/nginx/nginx.conf:ro
+      - ./backend/static/:/static:ro
+
+volumes:
+  mariadb_data:

@@ -1,27 +1,34 @@
+include:
+  - backend/compose-backend.yaml
 
 services:
 
   database:
+    volumes:
+      - mariadb_data:/var/lib/mysql/prod
     expose:
-      - "12306:12306"
+      - "12306"
     environment:
       MYSQL_TCP_PORT: 12306
       MYSQL_UNIX_PORT: 12306
+    networks:
+      - nginx-proxy-network
 
   backend:
+    deploy:
+      resources:
+        limits:
+          memory: 1gb
+        reservations:
+          memory: 500M
     expose:
       - "9090"
+    networks:
+      - nginx-proxy-network
 
-  webserver:
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./configs/nginx/nginx-prod.conf:/etc/nginx/nginx.conf:ro
-      - ./.htpasswd:/etc/nginx/.htpasswd
-      - ./backend/static/:/static:ro
-      - ./public:/public:ro
-      - ${SSL_KEY_LOCATION}:/certs/key.pem:ro
-      - ${SSL_CERT_LOCATION}:/certs/cert.pem:ro
-      - ${SSL_NGINX_OPTIONS_LOCATION}:/certs/options-ssl-nginx.conf
-      - ${SSL_DHPARAMS_LOCATION}:/certs/ssl-dhparams.pem
+volumes:
+  mariadb_data:
+
+networks:
+  nginx-proxy-network:
+    external: true

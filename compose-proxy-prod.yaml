@@ -1,0 +1,24 @@
+
+services:
+
+  webserver:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx-prod.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/.htpasswd:/etc/nginx/.htpasswd
+      - ./backend/static/:/static:ro
+      - ./public:/public:ro
+      - ${SSL_KEY_LOCATION}:/certs/key.pem:ro
+      - ${SSL_CERT_LOCATION}:/certs/cert.pem:ro
+      - ${SSL_NGINX_OPTIONS_LOCATION}:/certs/options-ssl-nginx.conf
+      - ${SSL_DHPARAMS_LOCATION}:/certs/ssl-dhparams.pem
+    networks:
+      - nginx-proxy-network
+
+networks:
+  nginx-proxy-network:
+    external: true
