@@ -1,6 +1,17 @@
 
 services:
 
+  database:
+    expose:
+      - "12306:12306"
+    environment:
+      MYSQL_TCP_PORT: 12306
+      MYSQL_UNIX_PORT: 12306
+
+  backend:
+    expose:
+      - "9090"
+
   webserver:
     ports:
       - "80:80"
