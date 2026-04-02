@@ -7,12 +7,11 @@ services:
     volumes:
       - mariadb_data:/var/lib/mysql
     expose:
-      - "12306"
-    environment:
-      MYSQL_TCP_PORT: 12306
-      MYSQL_UNIX_PORT: 12306
+      - "3306"
     networks:
-      - nginx-proxy-network
+      nginx-proxy-network:
+        aliases:
+          - stage-database
 
   backend:
     deploy:
@@ -22,9 +21,11 @@ services:
         reservations:
           memory: 500M
     expose:
-      - "9090"
+      - "8080"
     networks:
-      - nginx-proxy-network
+      nginx-proxy-network:
+        aliases:
+          - stage-backend
 
 volumes:
   mariadb_data:

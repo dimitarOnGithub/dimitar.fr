@@ -9,7 +9,9 @@ services:
     expose:
       - "3306"
     networks:
-      - nginx-proxy-network
+      nginx-proxy-network:
+        aliases:
+          - prod-database
 
   backend:
     deploy:
@@ -21,7 +23,9 @@ services:
     expose:
       - "8080"
     networks:
-      - nginx-proxy-network
+      nginx-proxy-network:
+        aliases:
+          - prod-backend
 
 volumes:
   mariadb_data:
