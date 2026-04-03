@@ -11,8 +11,6 @@
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/static/css/styles.css">
-    <link rel="stylesheet" href="/static/css/partials/header.css">
-    <link rel="stylesheet" href="/static/css/partials/footer.css">
     <link rel="stylesheet" href="/static/css/fonts.css">
     <link rel="icon" type="image/x-icon" href="/static/icons/favicon.ico">
     ${head}

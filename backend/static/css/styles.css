@@ -31,7 +31,7 @@ body {
 }
 
 .highlight:visited {
-    color: #610061;
+    color: inherit;
 }
 
 .content {
@@ -40,4 +40,55 @@ body {
 
 ::selection {
     background-color: rgb(255, 105, 180, 0.4);
+}
+
+header {
+    font-size: 1.2rem;
+    margin-top: 25px;
+    margin-bottom: 30px;
+    margin-inline: 5px;
+    padding-inline: 10px;
+    border-bottom: 1px solid black;
+
+    @media (min-width: 720px) {
+        margin-top: 100px;
+    }
+
+    & a {
+          text-decoration: none;
+          color: inherit;
+
+          & :visited {
+                    color: inherit;
+                }
+      }
+
+}
+
+.footer {
+    display: block;
+    border-top: 1px solid black;
+    text-align: right;
+    padding-inline: 10px;
+    margin-bottom: 25px;
+    margin-top: 10px;
+    margin-inline: 5px;
+
+    @media (min-width: 720px) {
+        margin-top: 30px;
+    }
+
+    & a {
+        text-decoration: none;
+        color: inherit;
+
+        & :visited {
+                color: inherit;
+            }
+    }
+
+}
+
+.separator {
+  margin-inline: 5px;
 }

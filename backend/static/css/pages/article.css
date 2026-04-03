@@ -57,7 +57,7 @@ h2 {
 }
 
 .previous-article {
-  content: url("/icons/arrow-left.png");
+  content: url("/static/icons/arrow-left.png");
   align-self: start;
   margin-right: auto;
   max-block-size: 35%;
@@ -76,7 +76,7 @@ h2 {
 }
 
 .next-article {
-  content: url("/icons/arrow-right.png");
+  content: url("/static/icons/arrow-right.png");
   align-self: end;
   margin-left: auto;
   max-block-size: 35%;
