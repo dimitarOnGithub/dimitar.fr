@@ -10,7 +10,8 @@ services:
     volumes:
       - ./nginx/nginx-prod.conf:/etc/nginx/nginx.conf:ro
       - ${HTACCESS_FILE}:/etc/nginx/.htpasswd
-      - ./backend/static/:/static:ro
+      - ${PROD_STATIC_DIR}:/static:ro
+      - ${STAGE_STATIC_DIR}:/static:ro
       - ${PUBLIC_DIR}:/public:ro
       - ${SSL_KEY_LOCATION}:/certs/key.pem:ro
       - ${SSL_CERT_LOCATION}:/certs/cert.pem:ro
