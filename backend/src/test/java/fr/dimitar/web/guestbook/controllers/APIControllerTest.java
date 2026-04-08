@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -17,7 +18,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.List;
 
 @WebMvcTest(controllers = APIController.class)
-class GuestbookAPIControllerTest {
+@ActiveProfiles("api")
+class APIControllerTest {
 
     private final List<GuestbookModel> ENTRIES = List.of(
             new GuestbookModel("Hello", "google.com", "John", true),
@@ -35,7 +37,7 @@ class GuestbookAPIControllerTest {
     void getGuestbook() throws Exception {
         when(guestbookService.getAllEntries()).thenReturn(ENTRIES);
 
-        mockMvc.perform(get("/api/guestbook"))
+        mockMvc.perform(get("/guestbook"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.length()").value(2))
@@ -48,7 +50,7 @@ class GuestbookAPIControllerTest {
     void getGuestbook401Unauthorized() throws Exception {
         when(guestbookService.getAllEntries()).thenReturn(ENTRIES);
 
-        mockMvc.perform(get("/api/guestbook"))
+        mockMvc.perform(get("/guestbook"))
                 .andExpect(status().isUnauthorized());
     }
 
@@ -57,7 +59,7 @@ class GuestbookAPIControllerTest {
     void getGuestbookEmptyList() throws Exception {
         when(guestbookService.getAllEntries()).thenReturn(List.of());
 
-        mockMvc.perform(get("/api/guestbook"))
+        mockMvc.perform(get("/guestbook"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.length()").value(0));

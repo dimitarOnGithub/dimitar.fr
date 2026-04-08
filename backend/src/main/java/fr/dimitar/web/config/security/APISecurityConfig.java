@@ -1,7 +1,8 @@
-package fr.dimitar.web.config;
+package fr.dimitar.web.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,7 +22,8 @@ import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+@Profile("api")
+public class APISecurityConfig {
 
     @Bean
     public AuthenticationManager authenticationManager(
@@ -54,12 +56,12 @@ public class SecurityConfig {
     @Order(1)
     public SecurityFilterChain authChain(HttpSecurity httpSecurity){
         httpSecurity
-                .securityMatcher("/api/auth", "/api/myself")
+                .securityMatcher("/login", "/myself")
                 .csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.OPTIONS, "/api/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/auth").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/myself").authenticated()
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/myself").authenticated()
                 )
                 // Use session-based authentication
                 .sessionManagement(
@@ -74,20 +76,9 @@ public class SecurityConfig {
     @Order(2)
     public SecurityFilterChain apiChain(HttpSecurity httpSecurity) {
         httpSecurity
-                .securityMatcher("/api/**")
-                .authorizeHttpRequests(auth -> auth
-                        .anyRequest().authenticated()
-                );
-        return httpSecurity.build();
-    }
-
-    @Bean
-    @Order(3)
-    public SecurityFilterChain postsChain(HttpSecurity httpSecurity) {
-        httpSecurity
                 .securityMatcher("/**")
                 .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll()
+                        .anyRequest().authenticated()
                 );
         return httpSecurity.build();
     }

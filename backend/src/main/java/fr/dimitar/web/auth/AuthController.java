@@ -3,6 +3,7 @@ package fr.dimitar.web.auth;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import fr.dimitar.web.auth.dto.LoginRequest;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
+@Profile("api")
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
@@ -28,7 +30,7 @@ public class AuthController {
         this.authenticationManager = authenticationManager;
     }
 
-    @PostMapping("/api/auth")
+    @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest, HttpServletRequest request) {
 
         // Authenticate
@@ -52,7 +54,7 @@ public class AuthController {
         }
     }
 
-    @GetMapping("/api/myself")
+    @GetMapping("/myself")
     public ResponseEntity<?> getCurrentUser(@AuthenticationPrincipal UserDetails userDetails) {
         return ResponseEntity.status(200).body(Map.of("username", userDetails.getUsername()));
     }

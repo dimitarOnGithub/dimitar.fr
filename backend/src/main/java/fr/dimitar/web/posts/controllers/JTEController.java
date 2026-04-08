@@ -2,12 +2,14 @@ package fr.dimitar.web.posts.controllers;
 
 import fr.dimitar.web.posts.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller("postsJteController")
+@Profile("mvc")
 public class JTEController {
 
     private final PostService postService;

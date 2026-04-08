@@ -6,6 +6,7 @@ import fr.dimitar.web.posts.mapper.PostMapper;
 import fr.dimitar.web.posts.PostService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -14,6 +15,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController("postsApiController")
+@Profile("api")
 public class APIController {
 
     private final PostService postService;
@@ -23,12 +25,12 @@ public class APIController {
         this.postService = postService;
     }
 
-    @GetMapping("/api/posts")
+    @GetMapping("/posts")
     public List<PostModel> getPosts() {
         return this.postService.getPosts();
     }
 
-    @PostMapping("/api/posts")
+    @PostMapping("/posts")
     public ResponseEntity<PostModel> publishPost(@Valid @RequestBody PostRequest newPost) {
         PostModel publishPost = this.postService.publishPost(PostMapper.fromRequestToModel(newPost));
         URI location = ServletUriComponentsBuilder
@@ -41,30 +43,30 @@ public class APIController {
                 .build();
     }
 
-    @GetMapping("/api/drafts")
+    @GetMapping("/drafts")
     public List<PostModel> getDrafts(){
         return this.postService.getDrafts();
     }
 
-    @GetMapping("/api/posts/{id}")
+    @GetMapping("/posts/{id}")
     public ResponseEntity<PostModel> getPostById(@PathVariable Long id){
         PostModel post = this.postService.getPostById(id);
         return ResponseEntity.ok(post);
     }
 
-    @PutMapping("/api/posts/{id}")
+    @PutMapping("/posts/{id}")
     public ResponseEntity<PostModel> updatePostById(@PathVariable Long id, @RequestBody PostRequest postData){
         PostModel updatedPost = this.postService.updatePost(id, PostMapper.fromRequestToModel(postData));
         return ResponseEntity.ok(updatedPost);
     }
 
-    @GetMapping("/api/posts/{id}/previous")
+    @GetMapping("/posts/{id}/previous")
     public ResponseEntity<PostModel> getPreviousPost(@PathVariable Long id){
         PostModel post = this.postService.findPrevious(id);
         return ResponseEntity.ok(post);
     }
 
-    @GetMapping("/api/posts/{id}/next")
+    @GetMapping("/posts/{id}/next")
     public ResponseEntity<PostModel> getNextPost(@PathVariable Long id){
         PostModel post = this.postService.findNext(id);
         return ResponseEntity.ok(post);

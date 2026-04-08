@@ -10,7 +10,11 @@ import java.util.Optional;
 
 @Configuration
 @EnableJpaAuditing
-public class LocalConfig {
+public class BaseConfig {
+    /*
+    This config should only hold configuration stuff
+    that applies to all environments and profiles
+    */
 
     // Ensure the usage of UTC timestamps
     // https://docs.spring.io/spring-data/jpa/reference/auditing.html

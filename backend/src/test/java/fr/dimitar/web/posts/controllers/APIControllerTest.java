@@ -10,6 +10,7 @@ import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -24,6 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(APIController.class)
 @AutoConfigureMockMvc
+@ActiveProfiles("api")
 class APIControllerTest {
 
     @Autowired
@@ -42,7 +44,7 @@ class APIControllerTest {
                 )
         );
 
-        mockMvc.perform(get("/api/posts"))
+        mockMvc.perform(get("/posts"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.length()").value(2))
@@ -61,7 +63,7 @@ class APIControllerTest {
                 )
         );
 
-        mockMvc.perform(get("/api/posts"))
+        mockMvc.perform(get("/posts"))
                 .andExpect(status().isUnauthorized());
     }
 
@@ -76,7 +78,7 @@ class APIControllerTest {
         testPost.put("content", "Test post");
         testPost.put("draft", false);
         mockMvc.perform(
-                post("/api/posts").with(csrf())
+                post("/posts").with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(
                                testPost.toString()
@@ -97,7 +99,7 @@ class APIControllerTest {
         testPost.put("foobar", "Test post");
         testPost.put("draft", false);
         mockMvc.perform(
-                        post("/api/posts").with(csrf())
+                        post("/posts").with(csrf())
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(
                                         testPost.toString()
@@ -116,7 +118,7 @@ class APIControllerTest {
         testPost.put("content", "Test post");
         testPost.put("draft", false);
         mockMvc.perform(
-                        post("/api/posts")
+                        post("/posts")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(
                                         testPost.toString()
@@ -132,7 +134,7 @@ class APIControllerTest {
 
         when(postService.getPostById(any(Long.class))).thenReturn(post);
 
-        mockMvc.perform(get("/api/posts/1"))
+        mockMvc.perform(get("/posts/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("title").exists())
                 .andExpect(jsonPath("title").value("Test Post 1"));
@@ -145,7 +147,7 @@ class APIControllerTest {
 
         when(postService.getPostById(any(Long.class))).thenReturn(post);
 
-        mockMvc.perform(get("/api/posts/1"))
+        mockMvc.perform(get("/posts/1"))
                 .andExpect(status().isUnauthorized());
     }
 
@@ -154,7 +156,7 @@ class APIControllerTest {
     void getNonexistentPost() throws Exception {
         when(postService.getPostById(any(Long.class))).thenThrow(PostNotFoundException.class);
 
-        mockMvc.perform(get("/api/posts/99999"))
+        mockMvc.perform(get("/posts/99999"))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_PROBLEM_JSON));
     }
@@ -169,7 +171,7 @@ class APIControllerTest {
                 )
         );
 
-        mockMvc.perform(get("/api/drafts"))
+        mockMvc.perform(get("/drafts"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2));
     }
@@ -183,7 +185,7 @@ class APIControllerTest {
                 )
         );
 
-        mockMvc.perform(get("/api/drafts"))
+        mockMvc.perform(get("/drafts"))
                 .andExpect(status().isUnauthorized());
     }
 
