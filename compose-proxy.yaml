@@ -1,14 +1,16 @@
+include:
+  - infra/compose-proxy.yaml
+
+name: proxy
 
 services:
 
   webserver:
-    image: nginx:alpine
-    restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx/nginx-prod.conf:/etc/nginx/nginx.conf:ro
+      - ./infra/nginx/nginx-prod.conf:/etc/nginx/nginx.conf:ro
       - ${HTACCESS_FILE}:/etc/nginx/.htpasswd
       - ${PROD_STATIC_DIR}:/prod/static:ro
       - ${STAGE_STATIC_DIR}:/stage/static:ro
