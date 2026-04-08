@@ -1,5 +1,9 @@
 include:
+  - infra/compose-database.yaml
   - backend/compose-backend.yaml
+  - infra/compose-proxy.yaml
+
+name: local
 
 services:
 
@@ -12,17 +16,27 @@ services:
       MYSQL_TCP_PORT: 12306
       MYSQL_UNIX_PORT: 12306
 
-  backend:
-    ports:
-      - "8080:8080"
+  mvc:
+    expose:
+      - "8080"
+    depends_on:
+      database:
+        condition: service_healthy
+        restart: true
+
+  api:
+    expose:
+      - "8080"
+    depends_on:
+      database:
+        condition: service_healthy
+        restart: true
 
   webserver:
-    image: nginx:alpine
-    restart: unless-stopped
     ports:
       - "80:80"
     volumes:
-      - ./nginx/nginx-local.conf:/etc/nginx/nginx.conf:ro
+      - ./infra/nginx/nginx-local.conf:/etc/nginx/nginx.conf:ro
       - ./backend/static/:/static:ro
 
 volumes:

@@ -1,0 +1,6 @@
+
+services:
+
+  webserver:
+    image: nginx:alpine
+    restart: unless-stopped

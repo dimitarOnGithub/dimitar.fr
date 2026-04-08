@@ -1,24 +1,11 @@
 
 services:
-  database:
-    image: mariadb:11
-    restart: unless-stopped
-    environment:
-      MARIADB_DATABASE: ${DATABASE_NAME}
-      MARIADB_USER: ${DATABASE_USERNAME}
-      MARIADB_PASSWORD: ${DATABASE_PASSWORD}
-      MARIADB_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
-    healthcheck:
-      test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized" ]
-      start_period: 10s
-      interval: 10s
-      timeout: 5s
-      retries: 3
 
-  backend:
+  mvc:
     build: .
     restart: unless-stopped
     environment:
+      - SPRING_PROFILE=mvc
       - DATABASE_HOST=${DATABASE_HOST}
       - DATABASE_PORT=${DATABASE_PORT}
       - DATABASE_NAME=${DATABASE_NAME}
@@ -30,7 +17,20 @@ services:
       - EMAIL_PASSWORD=${EMAIL_PASSWORD}
       - EMAIL_SENDER_ADDRESS=${EMAIL_SENDER_ADDRESS}
       - EMAIL_RECIPIENT_ADDRESS=${EMAIL_RECIPIENT_ADDRESS}
-    depends_on:
-      database:
-        condition: service_healthy
-        restart: true
+
+  api:
+    build: .
+    restart: unless-stopped
+    environment:
+      - SPRING_PROFILE=api
+      - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_PORT=${DATABASE_PORT}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_USERNAME=${DATABASE_USERNAME}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+
+      - EMAIL_HOST=${EMAIL_HOST}
+      - EMAIL_USERNAME=${EMAIL_USERNAME}
+      - EMAIL_PASSWORD=${EMAIL_PASSWORD}
+      - EMAIL_SENDER_ADDRESS=${EMAIL_SENDER_ADDRESS}
+      - EMAIL_RECIPIENT_ADDRESS=${EMAIL_RECIPIENT_ADDRESS}
