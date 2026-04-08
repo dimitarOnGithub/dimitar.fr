@@ -26,7 +26,7 @@ public class Post {
     @CreationTimestamp
     private Instant publishedDate;
 
-    @Column(nullable = false, name = "is_draft", columnDefinition = "INT", length = 1)
+    @Column(nullable = false, name = "is_draft")
     private boolean isDraft;
 
     public Post(){};
@@ -57,4 +57,15 @@ public class Post {
         return this.isDraft;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setDraft(boolean draft) {
+        isDraft = draft;
+    }
 }

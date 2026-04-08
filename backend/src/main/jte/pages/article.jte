@@ -1,9 +1,8 @@
 @import fr.dimitar.web.posts.dto.PostModel
-@import java.util.Optional
 
 @param PostModel article
-@param Optional<PostModel> previous
-@param Optional<PostModel> next
+@param PostModel previous
+@param PostModel next
 
 @template.base(
     title = article.getTitle(),
@@ -25,16 +24,16 @@
         </div>
     </div>
     <div class="article-navigation">
-        @if (previous.isPresent())
-            <a class="previous-article" href="/posts/${previous.get().getId()}">
-                <h3>${previous.get().getTitle()}</h3>
-                <div class="article-date">${previous.get().formatPublishedDate("dd MMM, yyyy")}</div>
+        @if (previous != null)
+            <a class="previous-article" href="/posts/${previous.getId()}">
+                <h3>${previous.getTitle()}</h3>
+                <div class="article-date">${previous.formatPublishedDate("dd MMM, yyyy")}</div>
             </a>
         @endif
-        @if (next.isPresent())
-            <a class="next-article" href="/posts/${next.get().getId()}">
-                <h3>${next.get().getTitle()}</h3>
-                <div class="article-date">${next.get().formatPublishedDate("dd MMM, yyyy")}</div>
+        @if (next != null)
+            <a class="next-article" href="/posts/${next.getId()}">
+                <h3>${next.getTitle()}</h3>
+                <div class="article-date">${next.formatPublishedDate("dd MMM, yyyy")}</div>
             </a>
         @endif
     </div>

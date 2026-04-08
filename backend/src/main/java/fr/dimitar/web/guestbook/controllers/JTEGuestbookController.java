@@ -40,7 +40,7 @@ public class JTEGuestbookController {
         List<GuestbookModel> listOfEntries = this.guestbookService.getGuestbook();
         model.addAttribute("listOfEntries", listOfEntries);
 
-        return "guestbook";
+        return "pages/guestbook";
     }
 
     @PostMapping("/guestbook")

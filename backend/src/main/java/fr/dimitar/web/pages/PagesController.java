@@ -1,7 +1,7 @@
 package fr.dimitar.web.pages;
 
+import fr.dimitar.web.posts.PostService;
 import fr.dimitar.web.posts.dto.PostModel;
-import fr.dimitar.web.posts.services.JTEPostService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.error.ErrorController;
@@ -15,18 +15,18 @@ import java.util.*;
 @Controller
 public class PagesController implements ErrorController {
 
-    private final JTEPostService postService;
+    private final PostService postService;
 
     @Autowired
-    public PagesController(JTEPostService postService) {
+    public PagesController(PostService postService) {
         this.postService = postService;
     }
 
     @GetMapping("/")
     public String indexPage(Model model){
-        List<PostModel> posts = this.postService.getRecentPosts(6);
+        List<PostModel> posts = this.postService.getPostsWithLimit(6);
         model.addAttribute("posts", posts);
-        return "index";
+        return "pages/index";
     }
 
     @GetMapping("/archive")
@@ -40,17 +40,17 @@ public class PagesController implements ErrorController {
             postsMap.put(postYear, yearlyList);
         }
         model.addAttribute("postsMap", postsMap);
-        return "archive";
+        return "pages/archive";
     }
 
     @GetMapping("/now")
     public String nowPage() {
-        return "now";
+        return "pages/now";
     }
 
     @GetMapping("/about")
     public String aboutPage() {
-        return "about";
+        return "pages/about";
     }
 
     @RequestMapping("/error")

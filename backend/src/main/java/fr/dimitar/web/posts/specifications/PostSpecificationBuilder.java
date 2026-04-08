@@ -1,17 +1,30 @@
 package fr.dimitar.web.posts.specifications;
 
 import fr.dimitar.web.posts.Post;
-import fr.dimitar.web.posts.filters.PostsFilter;
 import org.springframework.data.jpa.domain.Specification;
 
 
 public class PostSpecificationBuilder {
 
-    public static Specification<Post> fromFilter(PostsFilter filter) {
-        Specification<Post> spec = Specification.allOf();
+    private Specification<Post> spec = Specification.allOf();
 
-        spec = spec.and(PostSpecification.draftsOnly(filter.isDraftsOnly()));
-
-        return spec;
+    public Specification<Post> build() {
+        return this.spec;
     }
+
+    public PostSpecificationBuilder draftsOnly() {
+        this.spec = this.spec.and(PostSpecification.draftsOnly(true));
+        return this;
+    }
+
+    public PostSpecificationBuilder publishedOnly() {
+        this.spec = this.spec.and(PostSpecification.draftsOnly(false));
+        return this;
+    }
+
+    public PostSpecificationBuilder byId(Long postId) {
+        this.spec = this.spec.and(PostSpecification.specificId(postId));
+        return this;
+    }
+
 }

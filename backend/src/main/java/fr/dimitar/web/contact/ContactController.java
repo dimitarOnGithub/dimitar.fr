@@ -38,7 +38,7 @@ public class ContactController {
             model.addAttribute("csrfToken", token);
             model.addAttribute("contactForm", new ContactForm());
         }
-        return "contact";
+        return "pages/contact";
     }
 
     @PostMapping("/contact")
