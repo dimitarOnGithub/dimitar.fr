@@ -12,9 +12,7 @@ services:
     expose:
       - "3306"
     networks:
-      nginx-proxy-network:
-        aliases:
-          - stage-database
+      - nginx-proxy-network
 
   mvc:
     deploy:
@@ -26,9 +24,7 @@ services:
     expose:
       - "8080"
     networks:
-      nginx-proxy-network:
-        aliases:
-          - stage-backend
+      - nginx-proxy-network
     depends_on:
       database:
         condition: service_healthy
@@ -44,9 +40,7 @@ services:
     expose:
       - "8080"
     networks:
-      nginx-proxy-network:
-        aliases:
-          - stage-backend
+      - nginx-proxy-network
     depends_on:
       database:
         condition: service_healthy
