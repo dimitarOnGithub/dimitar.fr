@@ -2,7 +2,7 @@ package fr.dimitar.web.guestbook.controllers;
 
 import fr.dimitar.web.guestbook.dto.GuestbookModel;
 import fr.dimitar.web.guestbook.forms.GuestbookForm;
-import fr.dimitar.web.guestbook.services.JTEGuestbookService;
+import fr.dimitar.web.guestbook.GuestbookService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.csrf.CsrfToken;
@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
-@Controller
-public class JTEGuestbookController {
+@Controller("guestbookJteController")
+public class JTEController {
 
-    private final JTEGuestbookService guestbookService;
+    private final GuestbookService guestbookService;
 
     @Autowired
-    public JTEGuestbookController(JTEGuestbookService guestbookService) {
+    public JTEController(GuestbookService guestbookService) {
         this.guestbookService = guestbookService;
     }
 
@@ -37,7 +37,7 @@ public class JTEGuestbookController {
         }
         model.addAttribute("csrfToken", token);
 
-        List<GuestbookModel> listOfEntries = this.guestbookService.getGuestbook();
+        List<GuestbookModel> listOfEntries = this.guestbookService.getPublishedEntries();
         model.addAttribute("listOfEntries", listOfEntries);
 
         return "pages/guestbook";
@@ -51,9 +51,9 @@ public class JTEGuestbookController {
         }
         String remoteIpAddress = request.getRemoteAddr();
         guestbookForm.setIpAddress(remoteIpAddress);
-        this.guestbookService.postGuestbook(guestbookForm);
+        this.guestbookService.postEntry(guestbookForm.toModel());
         model.addAttribute("guestbookForm", null);
-        List<GuestbookModel> listOfEntries = this.guestbookService.getGuestbook();
+        List<GuestbookModel> listOfEntries = this.guestbookService.getPublishedEntries();
         model.addAttribute("listOfEntries", listOfEntries);
         return "redirect:/guestbook";
     }

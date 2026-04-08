@@ -22,7 +22,7 @@ public class GuestbookEntry {
     @Column(name = "website")
     private String userWebsite;
 
-    @Column(nullable = false, name = "approved", columnDefinition = "INT", length = 1)
+    @Column(nullable = false, name = "approved")
     @ColumnDefault(value = "0")
     private boolean approved;
 

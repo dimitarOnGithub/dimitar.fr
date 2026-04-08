@@ -1,6 +1,6 @@
-package fr.dimitar.web.posts;
+package fr.dimitar.web.posts.controllers;
 
-import fr.dimitar.web.posts.controllers.JTEController;
+import fr.dimitar.web.posts.PostService;
 import fr.dimitar.web.posts.dto.PostModel;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

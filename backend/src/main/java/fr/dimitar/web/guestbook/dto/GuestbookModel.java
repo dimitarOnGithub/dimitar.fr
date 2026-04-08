@@ -17,6 +17,13 @@ public class GuestbookModel {
         this.ipAddress = null;
     }
 
+    public GuestbookModel(String content, String userWebsite, String username, boolean isApproved) {
+        this.content = content;
+        this.userWebsite = userWebsite;
+        this.username = username;
+        this.isApproved = isApproved;
+    }
+
     public String getContent() {
         if (content.isBlank()) {
             return null;

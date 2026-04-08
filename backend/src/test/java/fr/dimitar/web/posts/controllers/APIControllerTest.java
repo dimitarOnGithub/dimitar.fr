@@ -1,6 +1,6 @@
-package fr.dimitar.web.posts;
+package fr.dimitar.web.posts.controllers;
 
-import fr.dimitar.web.posts.controllers.APIController;
+import fr.dimitar.web.posts.PostService;
 import fr.dimitar.web.posts.dto.PostModel;
 import fr.dimitar.web.posts.exceptions.PostNotFoundException;
 import org.json.JSONObject;

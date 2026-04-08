@@ -1,5 +1,7 @@
 package fr.dimitar.web.guestbook.forms;
 
+import fr.dimitar.web.guestbook.dto.GuestbookModel;
+
 public class GuestbookForm {
 
     private String content;
@@ -66,6 +68,15 @@ public class GuestbookForm {
 
     public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
+    }
+
+    public GuestbookModel toModel() {
+        var model = new GuestbookModel();
+        model.setContent(this.content);
+        model.setUsername(this.username);
+        model.setUserWebsite(this.userWebsite);
+        model.setIpAddress(this.ipAddress);
+        return model;
     }
 
 }

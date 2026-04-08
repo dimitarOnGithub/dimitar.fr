@@ -1,9 +1,6 @@
-package fr.dimitar.web.guestbook.services;
+package fr.dimitar.web.guestbook;
 
-import fr.dimitar.web.guestbook.GuestbookEntry;
-import fr.dimitar.web.guestbook.GuestbookRepository;
 import fr.dimitar.web.guestbook.dto.GuestbookModel;
-import fr.dimitar.web.guestbook.forms.GuestbookForm;
 import fr.dimitar.web.guestbook.mapper.GuestbookMapper;
 import fr.dimitar.web.guestbook.specifications.GuestbookSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +12,24 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class JTEGuestbookService {
+public class GuestbookService {
 
     private final GuestbookRepository guestbookRepository;
 
     @Autowired
-    public JTEGuestbookService(GuestbookRepository guestbookRepository){
+    public GuestbookService(GuestbookRepository guestbookRepository){
         this.guestbookRepository = guestbookRepository;
     }
 
-    public List<GuestbookModel> getGuestbook() {
+    public List<GuestbookModel> getAllEntries() {
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        return this.guestbookRepository.findAll(sort)
+                .stream()
+                .map(GuestbookMapper::fromEntityToModel)
+                .toList();
+    }
+
+    public List<GuestbookModel> getPublishedEntries() {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
         Specification<GuestbookEntry> spec = GuestbookSpecification.approvedOnly(true);
         return this.guestbookRepository.findAll(spec, sort)
@@ -33,8 +38,8 @@ public class JTEGuestbookService {
                 .toList();
     }
 
-    public void postGuestbook(GuestbookForm guestbookRequest) {
-        GuestbookEntry entry = GuestbookMapper.fromFormToEntity(guestbookRequest);
+    public void postEntry(GuestbookModel guestbookRequest) {
+        GuestbookEntry entry = GuestbookMapper.fromModelToEntity(guestbookRequest);
         this.guestbookRepository.save(entry);
     }
 
