@@ -1,5 +1,8 @@
 include:
+  - infra/compose-database.yaml
   - backend/compose-backend.yaml
+
+name: prod
 
 services:
 
@@ -9,11 +12,9 @@ services:
     expose:
       - "3306"
     networks:
-      nginx-proxy-network:
-        aliases:
-          - prod-database
+      - nginx-proxy-network
 
-  backend:
+  api:
     deploy:
       resources:
         limits:
@@ -23,9 +24,27 @@ services:
     expose:
       - "8080"
     networks:
-      nginx-proxy-network:
-        aliases:
-          - prod-backend
+      - nginx-proxy-network
+    depends_on:
+      database:
+        condition: service_healthy
+        restart: true
+
+  mvc:
+    deploy:
+      resources:
+        limits:
+          memory: 1gb
+        reservations:
+          memory: 500M
+    expose:
+      - "8080"
+    networks:
+      - nginx-proxy-network
+    depends_on:
+      database:
+        condition: service_healthy
+        restart: true
 
 volumes:
   mariadb_data:
