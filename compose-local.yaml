@@ -13,8 +13,8 @@ services:
       MYSQL_UNIX_PORT: 12306
 
   backend:
-    expose:
-      - "8080"
+    ports:
+      - "8080:8080"
 
   webserver:
     image: nginx:alpine
