@@ -9,10 +9,7 @@ content = @`
             <a class="highlight" target="_blank" href="https://nownownow.com/about">nownownow</a>
             for more information on how to create your own!
         </p>
-        <h2>Log Entry #001</h2>
-        <div class="last-updated">
-            April, 2026
-        </div>
+        <h2>Log Entry — April, 2026</h2>
         <p>
             Currently building this site from the ground up. I'm mostly done with the Ansible playbooks for the VPS setup,
             at least the general structure, still have to refine them and get most of the hardcoded stuff out.
