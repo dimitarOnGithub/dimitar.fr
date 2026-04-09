@@ -2,5 +2,5 @@
 services:
 
   webserver:
-    image: nginx:alpine
+    image: nginx:1.29.8
     restart: unless-stopped
