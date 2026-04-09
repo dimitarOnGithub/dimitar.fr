@@ -6,7 +6,7 @@ backend/jte-classes/**
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-ansible/inventory.yml
+ansible/inventory-*.yml
 
 ### STS ###
 .apt_generated

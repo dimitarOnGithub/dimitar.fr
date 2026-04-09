@@ -1,0 +1,16 @@
+---
+
+- name: Escalate Docker user privileges
+  hosts: personal
+
+  vars:
+    ansible_become: true
+    ansible_become_method: sudo
+    ansible_become_user: root
+
+  tasks:
+
+    - name: Remove docker user from sudoers
+      ansible.builtin.file:
+        path: /etc/sudoers.d/docker-sudo-access
+        state: absent

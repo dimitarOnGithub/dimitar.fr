@@ -1,6 +1,6 @@
 ---
 
-- name: Create Docker user & group
+- name: Install Docker
   hosts: personal
 
   vars:

@@ -1,0 +1,18 @@
+---
+
+- name: Escalate Docker user privileges
+  hosts: personal
+
+  vars:
+    ansible_become: true
+    ansible_become_method: sudo
+    ansible_become_user: root
+
+  tasks:
+
+    - name: Add docker user to sudoers
+      ansible.builtin.copy:
+        dest: /etc/sudoers.d/docker-sudo-access
+        src: ./files/docker-sudo-access
+        owner: root
+        mode: '440'

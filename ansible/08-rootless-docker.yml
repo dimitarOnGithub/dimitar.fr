@@ -1,0 +1,124 @@
+---
+
+- name: Configure Rootless Docker
+  hosts: personal
+  gather_facts: false
+
+  vars:
+    ansible_user: docker
+    ansible_become: false
+    ansible_become_method: sudo
+    ansible_become_user: root
+
+  tasks:
+    - name: Install uidmap package
+      ansible.builtin.apt:
+        name: uidmap
+        state: present
+      become: true
+
+    - name: Stop & Disable Docker
+      ansible.builtin.service:
+        name: docker
+        state: stopped
+        enabled: false
+      become: true
+
+    - name: Get Docker status
+      ansible.builtin.command: systemctl is-active docker
+      register: docker_status
+      ignore_errors: true
+
+    - name: Verify Docker offline
+      ansible.builtin.fail:
+        msg: Docker has failed to stop
+      when: docker_status['stdout'] == "active"
+
+    - name: Remove Docker socket
+      ansible.builtin.file:
+        path: /var/run/docker.sock
+        state: absent
+      become: true
+
+    - name: Verify Rootless conversion script exists
+      ansible.builtin.stat:
+        path: /usr/bin/dockerd-rootless-setuptool.sh
+      register: stat_result
+
+    - name: Install rootless extras package
+      ansible.builtin.apt:
+        package: docker-ce-rootless-extras
+        state: present
+      when: not stat_result.stat.exists
+
+    - name: Change file ownership
+      ansible.builtin.file:
+        path: /usr/bin/dockerd-rootless-setuptool.sh
+        owner: docker
+        group: docker
+        mode: '744'
+      become: true
+
+    - name: Execute rootless conversion script
+      ansible.builtin.command: /usr/bin/dockerd-rootless-setuptool.sh install
+      become: false
+
+    - name: Update PATH for user docker
+      ansible.builtin.lineinfile:
+        path: /home/docker/.bashrc
+        line: export PATH=/usr/bin:$PATH
+
+    - name: Get user ID
+      ansible.builtin.command: id -u
+      register: id_output
+
+    - name: Set DOCKER_HOST env var
+      ansible.builtin.lineinfile:
+        path: /home/docker/.bashrc
+        line: export DOCKER_HOST=unix:///run/user/{{ id_output.stdout }}/docker.sock
+
+    - name: Get Docker info
+      ansible.builtin.command: docker info
+      register: docker_info
+
+    - name: Verify rootless setup
+      ansible.builtin.fail:
+        msg: Docker rootless setup has failed
+      when: "'rootless' not in docker_info.stdout"
+
+    - name: Start Rootless Docker
+      ansible.builtin.command: systemctl --user start docker
+
+    - name: Enable Rootless Docker
+      ansible.builtin.command: systemctl --user enable docker
+
+    - name: Turn on user linger
+      ansible.builtin.command: loginctl enable-linger docker
+      become: true
+
+    - name: Expose unprivileged ports
+      ansible.posix.sysctl:
+        name: net.ipv4.ip_unprivileged_port_start
+        value: '0'
+        sysctl_set: true
+        state: present
+        reload: true
+      become: true
+
+    - name: Ensure directory exists
+      ansible.builtin.file:
+        path: /home/docker/.config/systemd/user/docker.service.d/
+        state: directory
+
+    - name: Copy Docker network config override
+      ansible.builtin.copy:
+        dest: /home/docker/.config/systemd/user/docker.service.d/docker-network-override.conf
+        src: ./files/docker-network-override.conf
+        owner: docker
+        mode: '644'
+
+    - name: Reload daemon
+      ansible.builtin.command: systemctl --user daemon-reload
+
+    - name: Restart Docker
+      ansible.builtin.command: systemctl --user restart docker

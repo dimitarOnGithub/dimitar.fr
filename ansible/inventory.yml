@@ -3,9 +3,13 @@ all:
   hosts:
     personal:
       ansible_connection: ssh
-      ansible_host: NULL
+      ansible_host: <INSERT HOST>
 
   vars:
-    ansible_user: ubuntu
-    ansible_ssh_private_key_file: NULL
-    pubkey_path: NULL
+    # Ansible connection vars
+    ansible_user: <INSERT SSH CONNECTION USER>
+    ansible_ssh_private_key_file: <INSERT PRIVATE KEY PATH>
+    pubkey_path: <PUBLIC KEY PATH>
+    # Certbot vars
+    domain_list: <LIST OF DOMAINS SEPARATED BY A COMMA>
+    email: <EMAIL>

@@ -1,0 +1,14 @@
+---
+
+- name: Generate SSL certificate
+  hosts: personal
+
+  vars:
+    ansible_become: true
+    ansible_become_method: sudo
+    ansible_become_user: root
+
+  tasks:
+
+    - name: Generate certificate
+      ansible.builtin.command: certbot certonly --standalone --dry-run -d {{ domain_list }} -m {{ email }}

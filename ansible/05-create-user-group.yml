@@ -20,3 +20,34 @@
         create_home: yes
         shell: /bin/bash
         groups: docker
+
+    - name: Deploy public key
+      ansible.posix.authorized_key:
+        user: docker
+        state: present
+        key: "{{ lookup('file', pubkey_path) }}"
+      when: pubkey_path != ""
+
+    - name: Add user to Allowed SSH users
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config.d/99-disable-password.conf
+        search_string: "AllowUsers ubuntu"
+        line: "AllowUsers ubuntu docker"
+
+    - name: Reload SSH
+      ansible.builtin.service:
+        name: ssh
+        state: reloaded
+
+    - name: Get post-reload state
+      ansible.builtin.command: systemctl is-active ssh
+      register: sshd_status
+
+    - name: Record state
+      ansible.builtin.debug:
+        msg: "SSH daemon post-restart state: {{ sshd_status['stdout'] }}"
+
+    - name: Verify state
+      ansible.builtin.fail:
+        msg: SSH daemon has failed to reload post-config deployment
+      when: sshd_status['stdout'] != "active"

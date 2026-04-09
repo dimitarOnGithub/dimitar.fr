@@ -1,0 +1,24 @@
+---
+
+- name: Install Certbot
+  hosts: personal
+
+  vars:
+    ansible_become: true
+    ansible_become_method: sudo
+    ansible_become_user: root
+
+  tasks:
+
+    - name: Clean up system Certbot
+      ansible.builtin.apt:
+        name: certbot
+        state: absent
+
+    - name: Install Certbot via snap
+      community.general.snap:
+        name: certbot
+        classic: true
+
+    - name: Create link to bin
+      ansible.builtin.command: ln -s /snap/bin/certbot /usr/local/bin/certbot
