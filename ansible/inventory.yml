@@ -11,5 +11,6 @@ all:
     ansible_ssh_private_key_file: <INSERT PRIVATE KEY PATH>
     pubkey_path: <PUBLIC KEY PATH>
     # Certbot vars
+    cert_name: <NAME OF THE CERTIFICATE>
     domain_list: <LIST OF DOMAINS SEPARATED BY A COMMA>
     email: <EMAIL>

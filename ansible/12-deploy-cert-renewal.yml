@@ -1,0 +1,32 @@
+---
+
+- name: Certbot Renewal Script
+  hosts: personal
+
+  vars:
+    ansible_become: true
+    ansible_become_method: sudo
+    ansible_become_user: root
+
+  tasks:
+
+    - name: Install swaks
+      ansible.builtin.apt:
+        name:
+          - swaks
+        state: present
+
+    - name: Deploy certificate renewal script
+      ansible.builtin.copy:
+        dest: /usr/bin/certbot-renew-certificate.sh
+        src: ./files/certbot-renew-certificate.sh
+        owner: root
+        mode: '700'
+
+    - name: Add script to cron
+      ansible.builtin.cron:
+        name: "Certificate Renewal Script"
+        job: "/usr/bin/bash /usr/bin/certbot-renew-certificate.sh"
+        minute: "0"
+        hour: "8"
+        weekday: "1"

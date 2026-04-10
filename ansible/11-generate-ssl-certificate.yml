@@ -10,5 +10,14 @@
 
   tasks:
 
+    - name: Dry run the certificate generation
+      ansible.builtin.command: certbot certonly -n --standalone --dry-run --cert-name {{ cert_name }} -d {{ domain_list }} -m {{ email }}
+      register: dryrun_output
+
+    - name: Verify dry run
+      ansible.builtin.fail:
+        msg: Dry run failed
+      when: "'successful' not in dryrun_output.stdout"
+
     - name: Generate certificate
-      ansible.builtin.command: certbot certonly --standalone --dry-run -d {{ domain_list }} -m {{ email }}
+      ansible.builtin.command: certbot certonly -n --standalone --cert-name {{ cert_name }} -d {{ domain_list }} -m {{ email }}
