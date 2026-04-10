@@ -1,29 +1,28 @@
 .archive-container {
     display: grid;
     padding-inline: 10px;
+}
 
-    & a {
-        font-style: italic;
-        font-weight: bold;
-        font-size: 1.3rem;
-        margin-block: 0;
-        color: #292626;
-        text-decoration: none;
-        justify-content: flex-end;
-    }
+.archive-container a {
+    font-style: italic;
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin-block: 0;
+    color: #292626;
+    text-decoration: none;
+}
 
-    & button {
-        border: none;
-        background: none;
-        justify-self: center;
-        font-size: 1.2rem;
-        font-family: inherit;
-        font-weight: bold;
+.archive-container button {
+    border: none;
+    background: none;
+    justify-self: center;
+    font-size: 1.2rem;
+    font-family: inherit;
+    font-weight: bold;
+}
 
-        &:hover {
-            cursor: pointer;
-        }
-    }
+.archive-container button:hover {
+    cursor: pointer;
 }
 
 h1 {
@@ -32,20 +31,19 @@ h1 {
 }
 
 .item {
-  display: flex;
-  margin-block: 10px;
-  padding-inline: 10px;
-  align-items: first baseline;
+    display: flex;
+    margin-block: 10px;
+    padding-inline: 10px;
+    align-items: first baseline;
+}
 
-  & .breaker {
+.item .breaker {
     flex-grow: 1;
     height: 0.9rem;
     border-bottom: 1px dotted black;
     margin-inline: 2px;
-  }
+}
 
-  & .item-date {
+.item .item-date {
     flex-shrink: 0;
-  }
-
 }

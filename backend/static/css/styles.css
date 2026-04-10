@@ -1,5 +1,5 @@
 html {
-    font-family: 'CrimsonText', sans-serif;
+    font-family: 'CrimsonText', serif;
     background-color: #CCCCCC;
     color: #292626;
     font-size: 2rem;
@@ -14,7 +14,7 @@ body {
     background-image: linear-gradient(
             to right,
             rgba(255, 160, 177, 0.1),
-            rgb(255, 105, 180, 0.6)
+            rgba(255, 105, 180, 0.6)
     );
     border-radius: 0.4em 0 0.7em 0;
     color: #292626;
@@ -39,9 +39,10 @@ body {
 }
 
 ::selection {
-    background-color: rgb(255, 105, 180, 0.4);
+    background-color: rgba(255, 105, 180, 0.4);
 }
 
+/* Header */
 header {
     font-size: 1.2rem;
     margin-top: 25px;
@@ -49,22 +50,24 @@ header {
     margin-inline: 5px;
     padding-inline: 10px;
     border-bottom: 1px solid black;
-
-    @media (min-width: 720px) {
-        margin-top: 100px;
-    }
-
-    & a {
-          text-decoration: none;
-          color: inherit;
-
-          & :visited {
-                    color: inherit;
-                }
-      }
-
 }
 
+@media (min-width: 720px) {
+    header {
+        margin-top: 100px;
+    }
+}
+
+header a {
+    text-decoration: none;
+    color: inherit;
+}
+
+header a:visited {
+    color: inherit;
+}
+
+/* Footer */
 .footer {
     display: block;
     border-top: 1px solid black;
@@ -73,22 +76,23 @@ header {
     margin-bottom: 25px;
     margin-top: 10px;
     margin-inline: 5px;
+}
 
-    @media (min-width: 720px) {
+@media (min-width: 720px) {
+    .footer {
         margin-top: 30px;
     }
+}
 
-    & a {
-        text-decoration: none;
-        color: inherit;
+.footer a {
+    text-decoration: none;
+    color: inherit;
+}
 
-        & :visited {
-                color: inherit;
-            }
-    }
-
+.footer a:visited {
+    color: inherit;
 }
 
 .separator {
-  margin-inline: 5px;
+    margin-inline: 5px;
 }

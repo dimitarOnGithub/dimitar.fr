@@ -8,22 +8,25 @@ h2 {
 
 .error-page-content {
   display: grid;
+}
 
-  @media (min-width: 1000px) {
+@media (min-width: 1000px) {
+  .error-page-content {
     grid-template-columns: auto 3fr;
     grid-column-gap: 25px;
   }
-
 }
 
 img {
   display: block;
   height: auto;
   max-width: 100%;
+}
 
-  @media (min-width: 1000px) {
-      width: 100%;
-    }
+@media (min-width: 1000px) {
+  img {
+    width: 100%;
+  }
 }
 
 p {
@@ -31,8 +34,10 @@ p {
   padding-inline: 10px;
   text-wrap: balance;
   text-indent: 0;
+}
 
-  @media (min-width: 1000px) {
+@media (min-width: 1000px) {
+  p {
     text-align: left;
   }
 }

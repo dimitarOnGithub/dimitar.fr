@@ -45,25 +45,25 @@ textarea:focus {
 
 .name {
   display: inherit;
+}
 
-  & input[type=text] {
-    padding-inline: 10px;
-    width: -webkit-fill-available;
-    height: 1.3rem;
-    border: 1px solid #505050;
-    border-radius: 5px;
-    font-size: 0.7rem;
-  }
+.name input[type=text] {
+  padding-inline: 10px;
+  width: -webkit-fill-available;
+  height: 1.3rem;
+  border: 1px solid #505050;
+  border-radius: 5px;
+  font-size: 0.7rem;
 }
 
 input[type=email] {
-    padding-inline: 10px;
-    width: -webkit-fill-available;
-    height: 1.3rem;
-    border: 1px solid #505050;
-    border-radius: 5px;
-    font-size: inherit;
-    font-family: inherit;
+  padding-inline: 10px;
+  width: -webkit-fill-available;
+  height: 1.3rem;
+  border: 1px solid #505050;
+  border-radius: 5px;
+  font-size: inherit;
+  font-family: inherit;
 }
 
 input[type=email]:focus {
