@@ -2,43 +2,49 @@ package fr.dimitar.web.auth;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import fr.dimitar.web.auth.dto.LoginRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @Profile("api")
 public class AuthController {
 
-    private final AuthenticationManager authenticationManager;
+    private final LinkAuthenticationProvider authenticationManager;
+    private final AuthenticationService authenticationService;
 
-    public AuthController(AuthenticationManager authenticationManager) {
+    @Autowired
+    public AuthController(LinkAuthenticationProvider authenticationManager, AuthenticationService authenticationService) {
         this.authenticationManager = authenticationManager;
+        this.authenticationService = authenticationService;
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest, HttpServletRequest request) {
+    @GetMapping("/send-token")
+    public ResponseEntity<?> generateLinkLogin(HttpServletRequest request) {
+        this.authenticationService.generateLinkToken(request);
+        return ResponseEntity.ok(Map.of("status", "ok"));
+    }
 
-        // Authenticate
-        UsernamePasswordAuthenticationToken token =
-                new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password());
-
+    @GetMapping("/login")
+    public ResponseEntity<?> login(@RequestParam(name = "token") UUID token, HttpServletRequest request) {
+        // TODO: This isn't ideal, review in the future
+        var tokenAuthentication = new LinkAuthentication(
+                new LinkToken(token),
+                request.getRemoteAddr(),
+                request.getHeader("User-Agent")
+        );
         try {
-            Authentication auth = authenticationManager.authenticate(token);
+            Authentication auth = this.authenticationManager.authenticate(tokenAuthentication);
 
             // Store authentication in SecurityContext
             SecurityContextHolder.getContext().setAuthentication(auth);
@@ -50,13 +56,20 @@ public class AuthController {
             return ResponseEntity.ok(Map.of("status", "ok"));
         } catch (AuthenticationException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("error", "Authentication failed"));
+                    .body(Map.of("error", e.getMessage()));
         }
     }
 
     @GetMapping("/myself")
-    public ResponseEntity<?> getCurrentUser(@AuthenticationPrincipal UserDetails userDetails) {
-        return ResponseEntity.status(200).body(Map.of("username", userDetails.getUsername()));
+    public ResponseEntity<?> getCurrentUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        LinkAuthentication authentication = (LinkAuthentication) auth;
+
+        return ResponseEntity.ok(Map.of(
+                "ipAddress", authentication.getIpAddress(),
+                "userAgent", authentication.getUserAgent()
+        ));
     }
 
 }
